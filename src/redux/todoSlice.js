@@ -23,7 +23,6 @@ const todoSlice = createSlice({
             const index = state.findIndex(
                 task => task.id === action.payload.id
             );
-            console.log(action.payload)
             state[index].completed = action.payload.completed;
         },
 

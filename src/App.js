@@ -1,5 +1,5 @@
+import Header from './components/Header';
 import TasksList from './components/TasksList';
-import Form from './components/Form';
 import { useSelector } from 'react-redux';
 import './styles/normalize.css';
 
@@ -12,7 +12,7 @@ function App() {
 
   return (
     <>
-      <Form />
+      <Header />
       <TasksList tasks={tasks} />
       <div>Total tasks: {tasks.length}</div>
       <div>Completed: {completedTasks.length}</div>
