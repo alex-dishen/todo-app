@@ -4,10 +4,10 @@ import uniqid from 'uniqid';
 const todoSlice = createSlice({
     name: "tasks",
     initialState: [
-        { id: 1, title: 'todo1', completed: false },
-        { id: 2, title: 'todo2', completed: false },
-        { id: 3, title: 'todo3', completed: false },
-        { id: 4, title: 'todo4', completed: true },
+        { id: uniqid(), title: 'Go to the store', completed: false },
+        { id: uniqid(), title: 'Meet with friend', completed: true },
+        { id: uniqid(), title: 'Finish coding task', completed: true },
+        { id: uniqid(), title: 'Cook', completed: false },
     ],
     reducers: {
         addTask: (state, action) => {
@@ -18,14 +18,24 @@ const todoSlice = createSlice({
             };
             state.push(task);
         },
+
         toggleComplete: (state, action) => {
             const index = state.findIndex(
                 task => task.id === action.payload.id
             );
+            console.log(action.payload)
             state[index].completed = action.payload.completed;
         },
+
         deleteTask: (state, action) => {
             return state.filter(task => task.id !== action.payload.id)
+        },
+
+        changeTitle: (state, action) => {
+            const index = state.findIndex(
+                task => task.id === action.payload.id
+            );
+            state[index].title = action.payload.title;
         }
     }
 });
@@ -33,7 +43,9 @@ const todoSlice = createSlice({
 export const { 
     addTask,
     toggleComplete,
-    deleteTask
+    deleteTask,
+    toggleChange,
+    changeTitle
 } = todoSlice.actions;
 
 export default todoSlice.reducer;

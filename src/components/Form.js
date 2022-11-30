@@ -19,7 +19,11 @@ function Form() {
         value={value}
         onChange={ e => setValue(e.target.value) }
         />
-    <button onClick={ onAddClick } type='button'>Add Task</button>
+      <button 
+        onClick={ onAddClick }
+        type='button'>
+          Add Task
+      </button>
     </form>
   );
 }

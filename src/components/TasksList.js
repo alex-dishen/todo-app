@@ -1,10 +1,6 @@
-import { useSelector } from 'react-redux';
 import Task from './Task';
 
-function TasksList({ }) {
-    const tasks = useSelector(state => state.tasks);
-    const completedTasks = useSelector(state => state.tasks.filter(task => task.completed === true))
-
+function TasksList({ tasks }) {
     return(
         <div>
             {tasks.map(task => {
@@ -13,11 +9,9 @@ function TasksList({ }) {
                         key={task.id}
                         id={task.id}
                         title={task.title}
-                        completed={task.completed}/>
+                        completed={task.completed} />
                 )
             })}
-            <div>Total tasks: {tasks.length}</div>
-            <div>Finished tasks: {completedTasks.length}</div>
         </div>
     )
 }
