@@ -11,9 +11,10 @@ const GlobalStyle = styled.createGlobalStyle`
 
     #root {
         background-color: rgb(40, 42, 46);
-        margin-top: 30px;
+        margin: 40px 0 40px 0;
         padding: 35px 45px 35px 45px;
         border-radius: 25px;
+        overflow: scroll;
     }
 `
 

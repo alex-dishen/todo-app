@@ -1,5 +1,6 @@
 import Header from './components/Header';
 import TasksList from './components/TasksList';
+import TasksStats from './components/TasksStats';
 import { useSelector } from 'react-redux';
 import './styles/normalize.css';
 
@@ -14,8 +15,9 @@ function App() {
     <>
       <Header />
       <TasksList tasks={tasks} />
-      <div>Total tasks: {tasks.length}</div>
-      <div>Completed: {completedTasks.length}</div>
+      <TasksStats 
+        notCompleted={tasks.length}
+        completed={completedTasks.length}/>
     </>
   );
 }

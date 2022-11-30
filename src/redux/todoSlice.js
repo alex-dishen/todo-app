@@ -5,9 +5,10 @@ const todoSlice = createSlice({
     name: "tasks",
     initialState: [
         { id: uniqid(), title: 'Go to the store', completed: false },
-        { id: uniqid(), title: 'Meet with friend', completed: true },
-        { id: uniqid(), title: 'Finish coding task', completed: true },
+        { id: uniqid(), title: 'Meet with friend', completed: false },
+        { id: uniqid(), title: 'Finish coding task', completed: false },
         { id: uniqid(), title: 'Cook', completed: false },
+
     ],
     reducers: {
         addTask: (state, action) => {

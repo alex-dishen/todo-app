@@ -39,21 +39,21 @@ const FormWrapper = styled.form`
 `;
 
 const Input = styled.input`
-  background-color: #3c3f45;
   height: 35px;
   padding: 10px;
-  outline: none;
+  background-color: #3c3f45;
   color: white;
+  outline: none;
   border: none;
   border-radius: 8px;
   transition: 0.3s;
 `;
 
 const AddButton = styled.button`
-  background-color: #ffb859;
-  border: none;
-  font-size: 18px;
   padding: 7px 15px 7px 15px;
+  background-color: #ffb859;
+  font-size: 18px;
+  border: none;
   border-radius: 10px;
   cursor: pointer;
 `;
