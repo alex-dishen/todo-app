@@ -4,11 +4,10 @@ import TasksStats from './components/TasksStats';
 import { useSelector } from 'react-redux';
 import './styles/normalize.css';
 
-function App() {
-
-  const tasks = useSelector(state => state.tasks);
+function App() {  
+  const tasks = useSelector(state => state.tasks.tasks);
   const completedTasks = useSelector(
-    state => state.tasks.filter(task => task.completed === true)
+    state => state.tasks.tasks.filter(task => task.completed === true)
   );
 
   return (

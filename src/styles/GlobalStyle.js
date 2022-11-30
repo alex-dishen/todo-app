@@ -18,6 +18,16 @@ const GlobalStyle = styled.createGlobalStyle`
         overflow: scroll;
     }
 
+    button {
+        transition: 0.3s;
+        &:hover {
+            transform: scale(1.07);
+        }
+        &:active {
+            transform: scale(0.9);
+        }
+    }
+
     @media (max-width: 640px) {
         #root {
             transform: scale(0.8);

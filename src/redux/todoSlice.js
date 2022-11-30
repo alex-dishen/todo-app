@@ -1,15 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 import uniqid from 'uniqid';
 
+const items = localStorage.getItem('stateTasks') !== null 
+? JSON.parse(localStorage.getItem('stateTasks')) 
+: [];
+
 const todoSlice = createSlice({
     name: "tasks",
-    initialState: [
-        { id: uniqid(), title: 'Go to the store', completed: false },
-        { id: uniqid(), title: 'Meet with friend', completed: false },
-        { id: uniqid(), title: 'Finish coding task', completed: false },
-        { id: uniqid(), title: 'Cook', completed: false },
-
-    ],
+    initialState: {
+        tasks: items
+    },
     reducers: {
         addTask: (state, action) => {
             const task = {
@@ -17,25 +17,29 @@ const todoSlice = createSlice({
                 title: action.payload.title,
                 completed: false
             };
-            state.push(task);
+            state.tasks.push(task);
+            localStorage.setItem('stateTasks', JSON.stringify(state.tasks));
         },
 
         toggleComplete: (state, action) => {
-            const index = state.findIndex(
+            const index = state.tasks.findIndex(
                 task => task.id === action.payload.id
             );
-            state[index].completed = action.payload.completed;
+            state.tasks[index].completed = action.payload.completed;
+            localStorage.setItem('stateTasks', JSON.stringify(state.tasks));
         },
 
         deleteTask: (state, action) => {
-            return state.filter(task => task.id !== action.payload.id)
+            state.tasks = state.tasks.filter(task => task.id !== action.payload.id)
+            localStorage.setItem('stateTasks', JSON.stringify(state.tasks));
         },
 
         changeTitle: (state, action) => {
-            const index = state.findIndex(
+            const index = state.tasks.findIndex(
                 task => task.id === action.payload.id
             );
-            state[index].title = action.payload.title;
+            state.tasks[index].title = action.payload.title;
+            localStorage.setItem('stateTasks', JSON.stringify(state.tasks));
         }
     }
 });

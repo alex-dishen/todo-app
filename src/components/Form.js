@@ -46,7 +46,12 @@ const Input = styled.input`
   outline: none;
   border: none;
   border-radius: 8px;
-  transition: 0.3s;
+  transition: 0.4s;
+
+  &:hover, 
+  &:focus {
+    background-color: #42464f;
+  }
 `;
 
 const AddButton = styled.button`
