@@ -51,14 +51,14 @@ function Task({ id, title, completed}) {
                     onKeyPress={(e) => updateTitle(inputRef.current.value, e)} />
             </TaskSection>
             <ButtonSection>
-                <button
+                <ChangeButton
                     onClick={ changeFocus }>
-                        Change
-                </button>
-                <button
+                        <StyledPen />
+                </ChangeButton>
+                <DeleteButton
                     onClick={ handleDeleteClick }>
-                        Delete
-                </button>
+                        <StyledBin />
+                </DeleteButton>
             </ButtonSection>
         </TaskWrapper>
     )
@@ -68,7 +68,7 @@ const TaskWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 5px 15px 5px 15px;
+    padding: 10px 15px 10px 15px;
     margin-bottom: 13px;
     background-color: #3c3f45;
     border-radius: 15px;
@@ -90,6 +90,37 @@ const TextArea = styled.textarea`
     transition: 0.3s;
 `;
 
-const ButtonSection = styled.div``;
+const ButtonSection = styled.div`
+    display: flex;
+    gap: 10px;
+`;
+
+const ChangeButton = styled.button`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 55px;
+    background-color: #ffb859;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+`;
+
+const DeleteButton = styled(ChangeButton)`
+    width: 40px;
+    background-color: #ff3939;
+`;
+
+const StyledPen = styled(Pen)`
+    height: 100%;
+    width: 60%;
+`;
+
+const StyledBin = styled(Bin)`
+    height: 100%;
+    width: 100%;
+`;
+
 
 export default Task;
