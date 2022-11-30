@@ -1,6 +1,6 @@
 # CV Maker
 
-### 🔗 **Live preview** of the project is [here](https://alex-dishen.github.io/cv-maker/).
+### 🔗 **Live preview** of the project is [here](https://alex-dishen.github.io/todo-app/).
 
 ## **Features**
 * Create todo
