@@ -1,8 +1,9 @@
 import Task from './Task';
+import styled from 'styled-components';
 
 function TasksList({ tasks }) {
     return(
-        <div>
+        <TasksWrapper>
             {tasks.map(task => {
                 return (
                     <Task
@@ -12,8 +13,13 @@ function TasksList({ tasks }) {
                         completed={task.completed} />
                 )
             })}
-        </div>
+        </TasksWrapper>
     )
 }
+
+const TasksWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
 
 export default TasksList;

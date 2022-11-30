@@ -2,14 +2,17 @@ import { ReactComponent as Pen } from '../assets/pen.svg';
 import { ReactComponent as Bin } from '../assets/bin.svg';
 import { useDispatch } from 'react-redux';
 import { toggleComplete, deleteTask, changeTitle } from '../redux/todoSlice';
-import { useRef, useState } from 'react';
+import { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 
 function Task({ id, title, completed}) {
 
     const dispatch = useDispatch();
-    const inputRef = useRef(true);
-    const [isCompleted, setIsCompleted] = useState(false)
+    const inputRef = useRef();
+
+    useEffect(() => {
+        expendTextArea();
+    }, [])
 
     const handleCompletedClick = () => {
         dispatch(
@@ -37,18 +40,26 @@ function Task({ id, title, completed}) {
         inputRef.current.focus();
     };
 
+    const expendTextArea = () => {
+        inputRef.current.parentNode.dataset.replicatedValue = inputRef.current.value;
+    }
+
     return (
         <TaskWrapper>
             <TaskSection>
-                <input
+                <CheckBox
                     type="checkbox"
                     checked={ completed }
                     onChange={ handleCompletedClick }/>
-                <TextArea
-                    ref={inputRef}
-                    disabled={inputRef}
-                    defaultValue={title}
-                    onKeyPress={(e) => updateTitle(inputRef.current.value, e)} />
+                <TextAreaWrapper>
+                    <TextArea
+                        rows='1'
+                        ref={inputRef}
+                        disabled={inputRef}
+                        defaultValue={title}
+                        onInput={ expendTextArea }
+                        onKeyPress={(e) => updateTitle(inputRef.current.value, e)} />
+                </TextAreaWrapper>
             </TaskSection>
             <ButtonSection>
                 <ChangeButton
@@ -68,6 +79,7 @@ const TaskWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    min-height: 55px;
     padding: 10px 15px 10px 15px;
     margin-bottom: 13px;
     background-color: #3c3f45;
@@ -76,18 +88,49 @@ const TaskWrapper = styled.div`
 
 const TaskSection = styled.div`
     display: flex;
+    align-items: center;
+`;
+
+const CheckBox = styled.input`
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border: 1px solid white;
+    border-radius: 50%;
+    cursor: pointer;
+
+    &:checked {
+        background-color: white;
+    }
+`;
+
+const TextAreaWrapper = styled.div`
+    display: grid;
+
+    &::after {
+        width: 230px;
+        content: attr(data-replicated-value) " ";
+        white-space: pre-wrap;
+        visibility: hidden;
+        grid-area: 1 / 1 / 2 / 2;
+    }
 `;
 
 const TextArea = styled.textarea`
-    height: 35px;
-    padding: 10px;
+    width: 240px;
+    margin-left: 10px;
+
     background-color: inherit;
     color: white;
+
     resize: none;
+    overflow: hidden;
     outline: none;
+
     border: none;
     border-radius: 8px;
     transition: 0.3s;
+    grid-area: 1 / 1 / 2 / 2;
 `;
 
 const ButtonSection = styled.div`

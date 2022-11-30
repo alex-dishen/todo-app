@@ -28,7 +28,7 @@ const GlobalStyle = styled.createGlobalStyle`
     @media (max-width: 510px) {
         #root {
             transform: scale(0.6);
-            margin: -160px -70px -160px -70px;
+            margin: -200px -70px -200px -70px;
         }
     }
 `

@@ -1,1 +1,1 @@
-The app allows a user to add empty tasks. This is not a bug, it's done on purpose as I personally hate when I can't create an empty field and change it later.
+The app allows a user to add an empty task. This is not a bug, it's done on purpose as I personally hate when I can't create an empty field and then change it later.
