@@ -114,7 +114,7 @@ const DeleteButton = styled(ChangeButton)`
 
 const StyledPen = styled(Pen)`
     height: 100%;
-    width: 60%;
+    width: 50%;
 `;
 
 const StyledBin = styled(Bin)`
