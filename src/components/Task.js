@@ -1,4 +1,3 @@
-import { ReactComponent as Pen } from '../assets/pen.svg';
 import { ReactComponent as Bin } from '../assets/bin.svg';
 import { useDispatch } from 'react-redux';
 import { toggleComplete, deleteTask, changeTitle } from '../redux/todoSlice';
@@ -32,11 +31,6 @@ function Task({ id, title, completed}) {
         )
     };
 
-    const changeFocus = () => {
-        inputRef.current.disabled = false;
-        inputRef.current.focus();
-    };
-
     const expendTextArea = () => {
         inputRef.current.parentNode.dataset.replicatedValue = inputRef.current.value;
     }
@@ -52,25 +46,17 @@ function Task({ id, title, completed}) {
                     <TextArea
                         rows='1'
                         ref={inputRef}
-                        disabled={inputRef}
                         defaultValue={title}
                         onInput={(e) => {
                             expendTextArea();
                             updateTitle(inputRef.current.value, e)} } 
-                        onKeyDown={e => {if(e.key === 'Enter') inputRef.current.disabled = true;}} 
                         />
                 </TextAreaWrapper>
             </TaskSection>
-            <ButtonSection>
-                <ChangeButton
-                    onClick={ changeFocus }>
-                        <StyledPen />
-                </ChangeButton>
-                <DeleteButton
-                    onClick={ handleDeleteClick }>
-                        <StyledBin />
-                </DeleteButton>
-            </ButtonSection>
+            <DeleteButton
+                onClick={ handleDeleteClick }>
+                    <StyledBin />
+            </DeleteButton>
         </TaskWrapper>
     )
 }
@@ -133,31 +119,15 @@ const TextArea = styled.textarea`
     grid-area: 1 / 1 / 2 / 2;
 `;
 
-const ButtonSection = styled.div`
-    display: flex;
-    gap: 10px;
-`;
-
-const ChangeButton = styled.button`
+const DeleteButton = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 40px;
-    width: 55px;
-    background-color: #ffb859;
+    width: 40px;
+    background-color: #ff3939;
     border: none;
     border-radius: 10px;
     cursor: pointer;
-`;
-
-const DeleteButton = styled(ChangeButton)`
-    width: 40px;
-    background-color: #ff3939;
-`;
-
-const StyledPen = styled(Pen)`
-    height: 100%;
-    width: 50%;
 `;
 
 const StyledBin = styled(Bin)`
