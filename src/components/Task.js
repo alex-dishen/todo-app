@@ -94,7 +94,7 @@ const TextAreaWrapper = styled.div`
     display: grid;
 
     &::after {
-        width: 230px;
+        width: 290px;
         content: attr(data-replicated-value) " ";
         white-space: pre-wrap;
         visibility: hidden;
@@ -103,7 +103,7 @@ const TextAreaWrapper = styled.div`
 `;
 
 const TextArea = styled.textarea`
-    width: 240px;
+    width: 290px;
     margin-left: 10px;
 
     background-color: inherit;
@@ -123,6 +123,7 @@ const DeleteButton = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 40px;
     width: 40px;
     background-color: #ff3939;
     border: none;

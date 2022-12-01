@@ -57,6 +57,7 @@ const Input = styled.input`
 const AddButton = styled.button`
   padding: 7px 15px 7px 15px;
   background-color: #ffb859;
+  color: black;
   font-size: 18px;
   border: none;
   border-radius: 10px;
