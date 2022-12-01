@@ -136,5 +136,4 @@ const StyledBin = styled(Bin)`
     width: 100%;
 `;
 
-
 export default Task;
