@@ -27,12 +27,9 @@ function Task({ id, title, completed}) {
     };
 
     const updateTitle = (newTitle, e) => {
-        if(e.which === 13) {
-            dispatch(
-                changeTitle({ id: id, title: newTitle})
-            )
-            inputRef.current.disabled = true;
-        }
+        dispatch(
+            changeTitle({ id: id, title: newTitle})
+        )
     };
 
     const changeFocus = () => {
@@ -57,8 +54,11 @@ function Task({ id, title, completed}) {
                         ref={inputRef}
                         disabled={inputRef}
                         defaultValue={title}
-                        onInput={ expendTextArea }
-                        onKeyPress={(e) => updateTitle(inputRef.current.value, e)} />
+                        onInput={(e) => {
+                            expendTextArea();
+                            updateTitle(inputRef.current.value, e)} } 
+                        onKeyDown={e => {if(e.key === 'Enter') inputRef.current.disabled = true;}} 
+                        />
                 </TextAreaWrapper>
             </TaskSection>
             <ButtonSection>
