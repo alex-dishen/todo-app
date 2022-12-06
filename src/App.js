@@ -6,9 +6,7 @@ import './styles/normalize.css';
 
 function App() {  
   const tasks = useSelector(state => state.tasks.tasks);
-  const completedTasks = useSelector(
-    state => state.tasks.tasks.filter(task => task.completed === true)
-  );
+  const completedTasks = tasks.filter(task => task.completed);
 
   return (
     <>
