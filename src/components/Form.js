@@ -22,10 +22,10 @@ function Form() {
           value={value}
           placeholder='Any plans for today?'
           onChange={ e => setValue(e.target.value) }
-          onKeyPress={(e) => {if(e.which === 13) onAddClick(e)}}
+          onKeyPress={ e => {if(e.which === 13) onAddClick(e)} }
           />
       <AddButton 
-        onClick={ (e) => {onAddClick(e)} }>
+        onClick={ e => {onAddClick(e)} }>
           Add Task
       </AddButton>
     </FormWrapper>

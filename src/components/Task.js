@@ -11,7 +11,7 @@ function Task({ id, title, completed}) {
 
     useEffect(() => {
         expendTextArea();
-    }, [])
+    }, []);
 
     const handleCompletedClick = () => {
         dispatch(
@@ -25,7 +25,7 @@ function Task({ id, title, completed}) {
         );
     };
 
-    const updateTitle = (newTitle, e) => {
+    const updateTitle = (newTitle) => {
         dispatch(
             changeTitle({ id: id, title: newTitle})
         )
@@ -33,7 +33,7 @@ function Task({ id, title, completed}) {
 
     const expendTextArea = () => {
         inputRef.current.parentNode.dataset.replicatedValue = inputRef.current.value;
-    }
+    };
 
     return (
         <TaskWrapper>
@@ -47,9 +47,10 @@ function Task({ id, title, completed}) {
                         rows='1'
                         ref={inputRef}
                         defaultValue={title}
-                        onInput={(e) => {
+                        onInput={ () => {
                             expendTextArea();
-                            updateTitle(inputRef.current.value, e)} } 
+                            updateTitle(inputRef.current.value)}
+                        } 
                         />
                 </TextAreaWrapper>
             </TaskSection>
