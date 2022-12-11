@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addTask } from '../redux/todoSlice';
 import styled from 'styled-components';
+import { addTask } from '../redux/todoSlice';
 
 function Form() {
   const [value, setValue] = useState('');
@@ -9,24 +9,31 @@ function Form() {
 
   const onAddClick = (e) => {
     e.preventDefault();
-    dispatch(addTask({
-      title: value
-    }));
+    dispatch(
+      addTask({
+        title: value,
+      })
+    );
     setValue('');
   };
 
   return (
     <FormWrapper>
       <Input
-          type="text"
-          value={value}
-          placeholder='Any plans for today?'
-          onChange={ e => setValue(e.target.value) }
-          onKeyPress={ e => {if(e.which === 13) onAddClick(e)} }
-          />
-      <AddButton 
-        onClick={ e => {onAddClick(e)} }>
-          Add Task
+        type="text"
+        value={value}
+        placeholder="Any plans for today?"
+        onChange={(e) => setValue(e.target.value)}
+        onKeyPress={(e) => {
+          if (e.which === 13) onAddClick(e);
+        }}
+      />
+      <AddButton
+        onClick={(e) => {
+          onAddClick(e);
+        }}
+      >
+        Add Task
       </AddButton>
     </FormWrapper>
   );
@@ -48,7 +55,7 @@ const Input = styled.input`
   border-radius: 8px;
   transition: 0.4s;
 
-  &:hover, 
+  &:hover,
   &:focus {
     background-color: #42464f;
   }

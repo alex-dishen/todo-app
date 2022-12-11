@@ -1,5 +1,5 @@
 # To-Do
-The **To-Do** project is created according to the assignment from **DomDev** company.
+The **To-Do** project is created according to the assignment from **DomDev** [company](https://domdev.pro).
 <br>
 <br>
 
@@ -33,5 +33,5 @@ npm start
 ```
 
 ## **Navigation**
-* See my previous project [Currency Converter](https://github.com/alex-dishen/currency-converter)
+* See my previous next [Currency Converter](https://github.com/alex-dishen/currency-converter)
 * See my previous project [Memory Card](https://github.com/alex-dishen/memory-card)
