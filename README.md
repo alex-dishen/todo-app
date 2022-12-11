@@ -1,8 +1,9 @@
-# CV Maker
+# To-Do
+The **To-Do** project is created according to the assignment from **DomDev** company.
+<br>
+<br>
 
 ### 🔗 **Live preview** of the project is [here](https://alex-dishen.github.io/todo-app/).
-
-### The app allows a user to add an empty task. This is not a bug, it's done on purpose as I personally hate when I can't create an empty field and change it later.
 
 ## **Features**
 * Create todo
@@ -15,6 +16,8 @@
 * Used **React**
 * Used **Redux Toolkit**
 * Used **StyledComponents**
+* Learned why we need Redux and how to use it
+* Learned StyledComponents
 
 ## **Getting Started**
 ```
@@ -28,3 +31,7 @@ npm install
 
 npm start
 ```
+
+## **Navigation**
+* See my previous project [Currency Converter](https://github.com/alex-dishen/currency-converter)
+* See my previous project [Memory Card](https://github.com/alex-dishen/memory-card)
