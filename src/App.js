@@ -1,4 +1,6 @@
 import { useSelector } from 'react-redux';
+import styled from 'styled-components';
+import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import TasksList from './components/TasksList';
 import TasksStats from './components/TasksStats';
@@ -10,14 +12,21 @@ function App() {
 
   return (
     <>
-      <Header />
-      <TasksList tasks={tasks} />
-      <TasksStats
-        notCompleted={tasks.length}
-        completed={completedTasks.length}
-      />
+      <Sidebar />
+      <Main>
+        <Header />
+        <TasksList tasks={tasks} />
+        <TasksStats
+          notCompleted={tasks.length}
+          completed={completedTasks.length}
+        />
+      </Main>
     </>
   );
 }
+
+const Main = styled.main`
+  grid-area: main;
+`;
 
 export default App;
