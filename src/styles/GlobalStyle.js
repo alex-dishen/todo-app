@@ -11,9 +11,7 @@ const GlobalStyle = styled.createGlobalStyle`
 
   #root {
     flex: 1;
-    display: grid;
-    grid-template-columns: repeat(2, auto);
-    grid-template-areas: '. main';
+    display: flex;
   }
 
   button {

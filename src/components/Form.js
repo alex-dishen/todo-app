@@ -17,24 +17,27 @@ function Form() {
     setValue('');
   };
 
+  const capitalizeFirstLetter = (str) =>
+    str.charAt(0).toUpperCase() + str.slice(1);
+
   return (
     <FormWrapper>
+      <AddButton
+        onClick={(e) => {
+          onAddClick(e);
+        }}
+      >
+        +
+      </AddButton>
       <Input
         type="text"
-        value={value}
+        value={capitalizeFirstLetter(value)}
         placeholder="Any plans for today?"
         onChange={(e) => setValue(e.target.value)}
         onKeyPress={(e) => {
           if (e.which === 13) onAddClick(e);
         }}
       />
-      <AddButton
-        onClick={(e) => {
-          onAddClick(e);
-        }}
-      >
-        Add Task
-      </AddButton>
     </FormWrapper>
   );
 }
@@ -42,28 +45,28 @@ function Form() {
 const FormWrapper = styled.form`
   display: flex;
   align-items: center;
+  height: 35px;
+  width: 100%;
   gap: 10px;
+  padding: 20px 8px;
+  border: 3px solid rgb(29, 29, 38);
+  border-radius: 13px;
 `;
 
 const Input = styled.input`
-  height: 35px;
+  height: 100%;
+  width: 100%;
   padding: 10px;
-  background-color: #3c3f45;
+  background-color: transparent;
   color: white;
   outline: none;
   border: none;
   border-radius: 8px;
-  transition: 0.4s;
-
-  &:hover,
-  &:focus {
-    background-color: #42464f;
-  }
 `;
 
 const AddButton = styled.button`
-  padding: 7px 15px 7px 15px;
-  background-color: #ffb859;
+  padding: 3px 10px;
+  background-color: #099d32;
   color: black;
   font-size: 18px;
   border: none;

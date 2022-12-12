@@ -13,20 +13,31 @@ function App() {
   return (
     <>
       <Sidebar />
-      <Main>
-        <Header />
-        <TasksList tasks={tasks} />
-        <TasksStats
-          notCompleted={tasks.length}
-          completed={completedTasks.length}
-        />
-      </Main>
+      <MainWrapper>
+        <Content>
+          <Header />
+          <TasksList tasks={tasks} />
+          <TasksStats
+            notCompleted={tasks.length}
+            completed={completedTasks.length}
+          />
+        </Content>
+      </MainWrapper>
     </>
   );
 }
 
-const Main = styled.main`
-  grid-area: main;
+const MainWrapper = styled.main`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1500px;
+  padding-top: 30px;
+`;
+
+const Content = styled.div`
+  width: 600px;
 `;
 
 export default App;
