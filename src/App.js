@@ -31,12 +31,12 @@ const MainWrapper = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 1500px;
   padding-top: 30px;
+  overflow: scroll;
 `;
 
 const Content = styled.div`
-  width: 600px;
+  width: min(590px, 66vw);
 `;
 
 export default App;
