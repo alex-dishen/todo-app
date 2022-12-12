@@ -12,6 +12,7 @@ const GlobalStyle = styled.createGlobalStyle`
   #root {
     flex: 1;
     display: flex;
+    color: white;
   }
 
   button {

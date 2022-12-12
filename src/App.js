@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import TasksList from './components/TasksList';
-import TasksStats from './components/TasksStats';
 import './styles/normalize.css';
 
 function App() {
   const tasks = useSelector((state) => state.tasks.tasks);
+  const notCompletedTasks = tasks.filter((task) => !task.completed);
   const completedTasks = tasks.filter((task) => task.completed);
 
   return (
@@ -16,10 +16,9 @@ function App() {
       <MainWrapper>
         <Content>
           <Header />
-          <TasksList tasks={tasks} />
-          <TasksStats
-            notCompleted={tasks.length}
-            completed={completedTasks.length}
+          <TasksList
+            completedTasks={completedTasks}
+            notCompletedTasks={notCompletedTasks}
           />
         </Content>
       </MainWrapper>

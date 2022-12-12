@@ -14,7 +14,7 @@ function Task({ id, title, completed }) {
   }, []);
 
   const handleCompletedClick = () => {
-    dispatch(toggleComplete({ id, completed: !completed }));
+    dispatch(toggleComplete({ id, completed: true }));
   };
 
   const handleDeleteClick = () => {

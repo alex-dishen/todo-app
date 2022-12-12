@@ -20,12 +20,11 @@ const HeaderWrapper = styled.header`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 `;
 
 const Collection = styled.div`
   display: flex;
-  color: white;
   font-weight: 600;
   font-size: 32px;
 `;
