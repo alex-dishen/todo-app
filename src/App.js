@@ -1,18 +1,23 @@
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import TasksList from './components/TasksList';
+import CollectionModal from './components/CollectionModal';
+
 import './styles/normalize.css';
 
 function App() {
+  const [isCreateNewCollection, setIsCreateNewCollection] = useState(false);
+
   const tasks = useSelector((state) => state.tasks.tasks);
   const notCompletedTasks = tasks.filter((task) => !task.completed);
   const completedTasks = tasks.filter((task) => task.completed);
 
   return (
     <>
-      <Sidebar />
+      <Sidebar setIsCreateNewCollection={setIsCreateNewCollection} />
       <MainWrapper>
         <Content>
           <Header />
@@ -22,6 +27,7 @@ function App() {
           />
         </Content>
       </MainWrapper>
+      {isCreateNewCollection && <CollectionModal />}
     </>
   );
 }
