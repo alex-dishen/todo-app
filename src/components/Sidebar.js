@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import CollectionList from './CollectionList';
+import CollectionList from './collections/CollectionList';
 
 function Sidebar({ setIsCreateNewCollection }) {
   const openModal = () => {

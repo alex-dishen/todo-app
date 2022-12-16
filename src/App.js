@@ -2,8 +2,8 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
-import TasksList from './components/TasksList';
-import CollectionModal from './components/CollectionModal';
+import TasksList from './components/tasks/TasksList';
+import CollectionModal from './components/collections/CollectionModal';
 import './styles/normalize.css';
 
 function App() {

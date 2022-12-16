@@ -1,11 +1,12 @@
-import EmojiPicker, { Emoji, EmojiStyle } from 'emoji-picker-react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import emojiBackground from '../assets/emojiBackground.png';
-import { addCollection } from '../redux/todoSlice';
-import '../styles/emojiPicker.css';
+import styled from 'styled-components';
+import EmojiPicker from 'emoji-picker-react';
+import Collection from './Collection';
+import { addCollection } from '../../redux/todoSlice';
+import emojiBackground from '../../assets/emojiBackground.png';
+import '../../styles/emojiPicker.css';
 
 function CollectionModal({ setIsCreateNewCollection }) {
   const [isChooseEmoji, setIsChooseEmoji] = useState(false);
@@ -60,12 +61,7 @@ function CollectionModal({ setIsCreateNewCollection }) {
           />
         )}
 
-        <Preview>
-          <EmojiHolder color={color}>
-            <Emoji unified={emoji} emojiStyle={EmojiStyle.APPLE} size={22} />
-          </EmojiHolder>
-          <CollectionName>{collectionTitle}</CollectionName>
-        </Preview>
+        <Collection color={color} emoji={emoji} name={collectionTitle} />
         <AddBtn onClick={onAddClick}>Add</AddBtn>
       </CollectionCreator>
       <Overlay />
@@ -149,24 +145,6 @@ const ColorPanel = styled.input.attrs({
     transform: scale(1.1);
   }
 `;
-
-const Preview = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-`;
-
-const EmojiHolder = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  width: 40px;
-  background-color: ${(props) => props.color};
-  border-radius: 6px;
-`;
-
-const CollectionName = styled.div``;
 
 const AddBtn = styled.button`
   width: 60px;

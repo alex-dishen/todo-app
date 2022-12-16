@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { addTask } from '../redux/todoSlice';
+import { addTask } from '../../redux/todoSlice';
 
 function Form() {
   const [value, setValue] = useState('');

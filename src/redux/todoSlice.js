@@ -1,41 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit';
 import uniqid from 'uniqid';
 
-const items =
+const collectionsList =
+  localStorage.getItem('stateCollections') !== null
+    ? JSON.parse(localStorage.getItem('stateCollections'))
+    : [];
+
+const tasksList =
   localStorage.getItem('stateTasks') !== null
     ? JSON.parse(localStorage.getItem('stateTasks'))
     : [];
 
+const saveToLocalStorage = (item, array) => {
+  localStorage.setItem(item, JSON.stringify(array));
+};
+
 const todoSlice = createSlice({
   name: 'collections',
   initialState: {
-    collections: [
-      {
-        id: uniqid(),
-        color: 'rgb(33, 33, 33)',
-        emoji: '123sdf',
-        name: 'School',
-      },
-      {
-        id: uniqid(),
-        color: 'rgb(33, 33, 33)',
-        emoji: '123sdf',
-        name: 'School',
-      },
-      {
-        id: uniqid(),
-        color: 'rgb(33, 33, 33)',
-        emoji: '123sdf',
-        name: 'School',
-      },
-      {
-        id: uniqid(),
-        color: 'rgb(33, 33, 33)',
-        emoji: '123sdf',
-        name: 'School',
-      },
-    ],
-    tasks: items,
+    collections: collectionsList,
+    tasks: tasksList,
   },
   reducers: {
     addCollection: (state, action) => {
@@ -45,7 +29,8 @@ const todoSlice = createSlice({
         emoji: action.payload.emoji,
         name: action.payload.name,
       };
-      state.collections.push(collection);
+      state.collections = [...state.collections, collection];
+      saveToLocalStorage('stateCollections', state.collections);
     },
 
     addTask: (state, action) => {
@@ -54,8 +39,8 @@ const todoSlice = createSlice({
         title: action.payload.title,
         completed: false,
       };
-      state.tasks.push(task);
-      localStorage.setItem('stateTasks', JSON.stringify(state.tasks));
+      state.tasks = [...state.tasks, task];
+      saveToLocalStorage('stateTasks', state.tasks);
     },
 
     toggleComplete: (state, action) => {
@@ -63,12 +48,12 @@ const todoSlice = createSlice({
         (task) => task.id === action.payload.id
       );
       state.tasks[index].completed = action.payload.completed;
-      localStorage.setItem('stateTasks', JSON.stringify(state.tasks));
+      saveToLocalStorage('stateTasks', state.tasks);
     },
 
     deleteTask: (state, action) => {
       state.tasks = state.tasks.filter((task) => task.id !== action.payload.id);
-      localStorage.setItem('stateTasks', JSON.stringify(state.tasks));
+      saveToLocalStorage('stateTasks', state.tasks);
     },
 
     changeTitle: (state, action) => {
@@ -76,7 +61,7 @@ const todoSlice = createSlice({
         (task) => task.id === action.payload.id
       );
       state.tasks[index].title = action.payload.title;
-      localStorage.setItem('stateTasks', JSON.stringify(state.tasks));
+      saveToLocalStorage('stateTasks', state.tasks);
     },
   },
 });

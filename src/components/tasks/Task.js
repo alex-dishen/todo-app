@@ -3,8 +3,8 @@ import { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
-import { toggleComplete, deleteTask, changeTitle } from '../redux/todoSlice';
-import { ReactComponent as Bin } from '../assets/bin.svg';
+import { toggleComplete, deleteTask, changeTitle } from '../../redux/todoSlice';
+import { ReactComponent as Bin } from '../../assets/bin.svg';
 
 function Task({ id, title, completed }) {
   const dispatch = useDispatch();
