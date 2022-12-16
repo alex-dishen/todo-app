@@ -8,7 +8,7 @@ import { addCollection } from '../../redux/todoSlice';
 import emojiBackground from '../../assets/emojiBackground.png';
 import '../../styles/emojiPicker.css';
 
-function CollectionModal({ setIsCreateNewCollection }) {
+function CollectionModal({ isCreateNewCollection, setIsCreateNewCollection }) {
   const [isChooseEmoji, setIsChooseEmoji] = useState(false);
   const [emoji, setEmoji] = useState('');
   const [collectionTitle, setCollectionTitle] = useState('Collection name');
@@ -61,7 +61,12 @@ function CollectionModal({ setIsCreateNewCollection }) {
           />
         )}
 
-        <Collection color={color} emoji={emoji} name={collectionTitle} />
+        <Collection
+          color={color}
+          emoji={emoji}
+          name={collectionTitle}
+          isCreateNewCollection={isCreateNewCollection}
+        />
         <AddBtn onClick={onAddClick}>Add</AddBtn>
       </CollectionCreator>
       <Overlay />
@@ -70,6 +75,7 @@ function CollectionModal({ setIsCreateNewCollection }) {
 }
 
 CollectionModal.propTypes = {
+  isCreateNewCollection: PropTypes.bool,
   setIsCreateNewCollection: PropTypes.func,
 };
 

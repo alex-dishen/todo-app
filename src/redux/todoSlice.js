@@ -56,7 +56,15 @@ const todoSlice = createSlice({
       saveToLocalStorage('stateTasks', state.tasks);
     },
 
-    changeTitle: (state, action) => {
+    changeCollectionTitle: (state, action) => {
+      const index = state.collections.findIndex(
+        (collection) => collection.id === action.payload.id
+      );
+      state.collections[index].name = action.payload.name;
+      saveToLocalStorage('stateCollections', state.collections);
+    },
+
+    changeTaskTitle: (state, action) => {
       const index = state.tasks.findIndex(
         (task) => task.id === action.payload.id
       );
@@ -72,7 +80,8 @@ export const {
   toggleComplete,
   deleteTask,
   toggleChange,
-  changeTitle,
+  changeCollectionTitle,
+  changeTaskTitle,
 } = todoSlice.actions;
 
 export default todoSlice.reducer;

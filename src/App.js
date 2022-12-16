@@ -19,7 +19,10 @@ function App() {
         </Content>
       </MainWrapper>
       {isCreateNewCollection && (
-        <CollectionModal setIsCreateNewCollection={setIsCreateNewCollection} />
+        <CollectionModal
+          setIsCreateNewCollection={setIsCreateNewCollection}
+          isCreateNewCollection={isCreateNewCollection}
+        />
       )}
     </>
   );

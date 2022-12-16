@@ -1,18 +1,15 @@
-import { useDispatch } from 'react-redux';
 import { Emoji, EmojiStyle } from 'emoji-picker-react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-function Collection({ color, emoji, name }) {
-  const dispatch = useDispatch();
-
+function Collection({ color, emoji, name, isCreateNewCollection }) {
   return (
-    <Preview>
+    <CollectionWrapper isCreateNewCollection={isCreateNewCollection}>
       <EmojiHolder color={color}>
         <Emoji unified={emoji} emojiStyle={EmojiStyle.APPLE} size={22} />
       </EmojiHolder>
       <CollectionName>{name}</CollectionName>
-    </Preview>
+    </CollectionWrapper>
   );
 }
 
@@ -20,12 +17,20 @@ Collection.propTypes = {
   color: PropTypes.string,
   emoji: PropTypes.string,
   name: PropTypes.string,
+  isCreateNewCollection: PropTypes.bool,
 };
 
-const Preview = styled.div`
+const CollectionWrapper = styled.div`
   display: flex;
   align-items: center;
+  padding: 10px 15px;
   gap: 10px;
+  cursor: ${(props) => (props.isCreateNewCollection ? 'auto' : 'pointer')};
+
+  &:hover {
+    background-color: ${(props) =>
+      props.isCreateNewCollection ? 'transparent' : 'white'};
+  }
 `;
 
 const EmojiHolder = styled.div`

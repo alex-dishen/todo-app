@@ -3,7 +3,11 @@ import { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
-import { toggleComplete, deleteTask, changeTitle } from '../../redux/todoSlice';
+import {
+  toggleComplete,
+  deleteTask,
+  changeTaskTitle,
+} from '../../redux/todoSlice';
 import { ReactComponent as Bin } from '../../assets/bin.svg';
 
 function Task({ id, title, completed }) {
@@ -23,7 +27,7 @@ function Task({ id, title, completed }) {
   };
 
   const updateTitle = (newTitle) => {
-    dispatch(changeTitle({ id, title: newTitle }));
+    dispatch(changeTaskTitle({ id, title: newTitle }));
   };
 
   const expendTextArea = () => {

@@ -10,7 +10,7 @@ function Sidebar({ setIsCreateNewCollection }) {
   return (
     <Aside>
       <div>
-        <div>Collections</div>
+        <Div>Collections</Div>
         <CollectionList />
       </div>
       <AddButton onClick={openModal}>+</AddButton>
@@ -31,6 +31,10 @@ const Aside = styled.aside`
   background-color: rgb(33, 33, 42);
   color: white;
   grid-area: sidebar;
+`;
+
+const Div = styled.div`
+  padding: 10px 15px;
 `;
 
 const AddButton = styled.button`
