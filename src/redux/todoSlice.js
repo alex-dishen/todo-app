@@ -7,11 +7,47 @@ const items =
     : [];
 
 const todoSlice = createSlice({
-  name: 'tasks',
+  name: 'collections',
   initialState: {
+    collections: [
+      {
+        id: uniqid(),
+        color: 'rgb(33, 33, 33)',
+        emoji: '123sdf',
+        name: 'School',
+      },
+      {
+        id: uniqid(),
+        color: 'rgb(33, 33, 33)',
+        emoji: '123sdf',
+        name: 'School',
+      },
+      {
+        id: uniqid(),
+        color: 'rgb(33, 33, 33)',
+        emoji: '123sdf',
+        name: 'School',
+      },
+      {
+        id: uniqid(),
+        color: 'rgb(33, 33, 33)',
+        emoji: '123sdf',
+        name: 'School',
+      },
+    ],
     tasks: items,
   },
   reducers: {
+    addCollection: (state, action) => {
+      const collection = {
+        id: uniqid(),
+        color: action.payload.color,
+        emoji: action.payload.emoji,
+        name: action.payload.name,
+      };
+      state.collections.push(collection);
+    },
+
     addTask: (state, action) => {
       const task = {
         id: uniqid(),
@@ -46,6 +82,7 @@ const todoSlice = createSlice({
 });
 
 export const {
+  addCollection,
   addTask,
   toggleComplete,
   deleteTask,

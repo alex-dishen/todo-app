@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import CollectionList from './CollectionList';
 
 function Sidebar({ setIsCreateNewCollection }) {
   const openModal = () => {
@@ -10,9 +11,7 @@ function Sidebar({ setIsCreateNewCollection }) {
     <Aside>
       <div>
         <div>Collections</div>
-        <CollectionWrapper>
-          <ImgHolder /> School
-        </CollectionWrapper>
+        <CollectionList />
       </div>
       <AddButton onClick={openModal}>+</AddButton>
     </Aside>
@@ -20,7 +19,7 @@ function Sidebar({ setIsCreateNewCollection }) {
 }
 
 Sidebar.propTypes = {
-  setIsCreateNewCollection: PropTypes.bool,
+  setIsCreateNewCollection: PropTypes.func,
 };
 
 const Aside = styled.aside`
@@ -32,25 +31,6 @@ const Aside = styled.aside`
   background-color: rgb(33, 33, 42);
   color: white;
   grid-area: sidebar;
-`;
-
-const CollectionWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 15px 0 15px 25px;
-  gap: 15px;
-
-  &:hover {
-    background-color: rgb(39, 39, 49);
-    cursor: pointer;
-  }
-`;
-
-const ImgHolder = styled.div`
-  height: 30px;
-  width: 30px;
-  background-color: #099d32;
-  border-radius: 6px;
 `;
 
 const AddButton = styled.button`

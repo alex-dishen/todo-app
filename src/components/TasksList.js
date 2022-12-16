@@ -1,8 +1,12 @@
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import Task from './Task';
 
-function TasksList({ completedTasks, notCompletedTasks }) {
+function TasksList() {
+  const tasks = useSelector((state) => state.collections.tasks);
+  const notCompletedTasks = tasks.filter((task) => !task.completed);
+  const completedTasks = tasks.filter((task) => task.completed);
+
   return (
     <TasksWrapper>
       <TaskStats>Tasks - {notCompletedTasks.length}</TaskStats>
@@ -26,11 +30,6 @@ function TasksList({ completedTasks, notCompletedTasks }) {
     </TasksWrapper>
   );
 }
-
-TasksList.propTypes = {
-  completedTasks: PropTypes.array,
-  notCompletedTasks: PropTypes.array,
-};
 
 const TasksWrapper = styled.div`
   display: flex;
