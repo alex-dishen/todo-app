@@ -89,34 +89,32 @@ const todoSlice = createSlice({
       saveToLocalStorage('stateCollections', state.collections);
     },
 
-    // ?????
-    toggleComplete: (state, action) => {
+    updateTask: (state, action) => {
       const collectionIndex = state.collections.findIndex(
         (collection) => collection.id === currentCollectionID
       );
-      const taskIndex = state.tasks.findIndex(
+      const taskIndex = state.collections[collectionIndex].tasks.findIndex(
         (task) => task.id === action.payload.id
       );
-      // console.log(state.collections[collectionIndex]);
-      state.collections[collectionIndex].tasks[taskIndex].completed =
-        action.payload.completed;
-      // saveToLocalStorage('stateTasks', state.tasks);
+
+      if (action.payload.completed) {
+        state.collections[collectionIndex].tasks[taskIndex].completed =
+          action.payload.completed;
+      } else {
+        state.collections[collectionIndex].tasks[taskIndex].title =
+          action.payload.title;
+      }
+      saveToLocalStorage('stateCollections', state.collections);
     },
 
-    // ?????
     deleteTask: (state, action) => {
-      state.tasks = state.tasks.filter((task) => task.id !== action.payload.id);
-      saveToLocalStorage('stateTasks', state.tasks);
-    },
-
-    // ??????
-    changeTaskTitle: (state, action) => {
-      const index = state.tasks.findIndex(
-        (task) => task.id === action.payload.id
+      const index = state.collections.findIndex(
+        (collection) => collection.id === currentCollectionID
       );
-      console.log(state.tasks[index].title);
-      state.tasks[index].title = action.payload.title;
-      // saveToLocalStorage('stateTasks', state.tasks);
+      state.collections[index].tasks = state.collections[index].tasks.filter(
+        (task) => task.id !== action.payload.id
+      );
+      saveToLocalStorage('stateCollections', state.collections);
     },
   },
 });
@@ -129,8 +127,7 @@ export const {
   deleteCollection,
 
   addTask,
-  toggleComplete,
-  changeTaskTitle,
+  updateTask,
   deleteTask,
 } = todoSlice.actions;
 

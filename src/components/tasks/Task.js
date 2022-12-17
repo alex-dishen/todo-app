@@ -3,11 +3,7 @@ import { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
-import {
-  toggleComplete,
-  deleteTask,
-  changeTaskTitle,
-} from '../../redux/todoSlice';
+import { updateTask, deleteTask } from '../../redux/todoSlice';
 import { ReactComponent as Bin } from '../../assets/bin.svg';
 
 function Task({ id, title, completed }) {
@@ -27,7 +23,7 @@ function Task({ id, title, completed }) {
     currentCollectionID !== '' ? currentCollection[0].color : '';
 
   const handleCompletedClick = () => {
-    dispatch(toggleComplete({ id, completed: !completed }));
+    dispatch(updateTask({ id, completed: !completed }));
   };
 
   const handleDeleteClick = () => {
@@ -35,7 +31,7 @@ function Task({ id, title, completed }) {
   };
 
   const updateTitle = (newTitle) => {
-    dispatch(changeTaskTitle({ id, title: newTitle }));
+    dispatch(updateTask({ id, title: newTitle }));
   };
 
   const expendTextArea = () => {
