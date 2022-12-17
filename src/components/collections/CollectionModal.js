@@ -58,11 +58,7 @@ function CollectionModal({ isCreateNewCollection }) {
         </BeautySection>
 
         {isChooseEmoji && (
-          <EmojiPicker
-            height={320}
-            onEmojiClick={chooseEmoji}
-            style={{ position: 'absolute' }}
-          />
+          <EmojiPicker height={320} onEmojiClick={chooseEmoji} />
         )}
 
         <Collection

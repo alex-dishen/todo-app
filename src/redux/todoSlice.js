@@ -55,19 +55,28 @@ const todoSlice = createSlice({
       saveToLocalStorage('stateCollections', state.collections);
     },
 
+    // ?????
     toggleComplete: (state, action) => {
       const collectionIndex = state.collections.findIndex(
-        (collection) => collection.id === state.collectionID
+        (collection) => collection.id === currentCollectionID
       );
       const taskIndex = state.tasks.findIndex(
         (task) => task.id === action.payload.id
       );
-      console.log(state.collections[collectionIndex]);
-      state.collections[collectionIndex].tasks.completed =
+      // console.log(state.collections[collectionIndex]);
+      state.collections[collectionIndex].tasks[taskIndex].completed =
         action.payload.completed;
       // saveToLocalStorage('stateTasks', state.tasks);
     },
 
+    // ?????
+    deleteCollection: (state, action) => {
+      state.collections = state.collections.filter(
+        (collection) => collection.id !== action.payload
+      );
+    },
+
+    // ?????
     deleteTask: (state, action) => {
       state.tasks = state.tasks.filter((task) => task.id !== action.payload.id);
       saveToLocalStorage('stateTasks', state.tasks);
@@ -75,12 +84,21 @@ const todoSlice = createSlice({
 
     changeCollectionTitle: (state, action) => {
       const index = state.collections.findIndex(
-        (collection) => collection.id === action.payload.id
+        (collection) => collection.id === currentCollectionID
       );
-      state.collections[index].name = action.payload.name;
+      state.collections[index].name = action.payload;
       saveToLocalStorage('stateCollections', state.collections);
     },
 
+    changeEmoji: (state, action) => {
+      const index = state.collections.findIndex(
+        (collection) => collection.id === currentCollectionID
+      );
+      state.collections[index].emoji = action.payload;
+      saveToLocalStorage('stateCollections', state.collections);
+    },
+
+    // ??????
     changeTaskTitle: (state, action) => {
       const index = state.tasks.findIndex(
         (task) => task.id === action.payload.id
@@ -105,12 +123,14 @@ export const {
   addCollection,
   addTask,
   toggleComplete,
+  deleteCollection,
   deleteTask,
   toggleChange,
   changeCollectionTitle,
   changeTaskTitle,
   setCollectionID,
   setIsCreateNewCollection,
+  changeEmoji,
 } = todoSlice.actions;
 
 export default todoSlice.reducer;
