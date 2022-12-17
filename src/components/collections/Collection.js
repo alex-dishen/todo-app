@@ -1,10 +1,21 @@
 import { Emoji, EmojiStyle } from 'emoji-picker-react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { setCollectionID } from '../../redux/todoSlice';
 
-function Collection({ color, emoji, name, isCreateNewCollection }) {
+function Collection({ id, color, emoji, name, isCreateNewCollection }) {
+  const dispatch = useDispatch();
+
+  const getCollectionId = () => {
+    dispatch(setCollectionID(id));
+  };
+
   return (
-    <CollectionWrapper isCreateNewCollection={isCreateNewCollection}>
+    <CollectionWrapper
+      isCreateNewCollection={isCreateNewCollection}
+      onClick={getCollectionId}
+    >
       <EmojiHolder color={color}>
         <Emoji unified={emoji} emojiStyle={EmojiStyle.APPLE} size={22} />
       </EmojiHolder>
@@ -14,6 +25,7 @@ function Collection({ color, emoji, name, isCreateNewCollection }) {
 }
 
 Collection.propTypes = {
+  id: PropTypes.string,
   color: PropTypes.string,
   emoji: PropTypes.string,
   name: PropTypes.string,

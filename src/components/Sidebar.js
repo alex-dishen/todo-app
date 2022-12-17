@@ -1,10 +1,12 @@
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import CollectionList from './collections/CollectionList';
+import { setIsCreateNewCollection } from '../redux/todoSlice';
 
-function Sidebar({ setIsCreateNewCollection }) {
+function Sidebar() {
+  const dispatch = useDispatch();
   const openModal = () => {
-    setIsCreateNewCollection(true);
+    dispatch(setIsCreateNewCollection(true));
   };
 
   return (
@@ -17,10 +19,6 @@ function Sidebar({ setIsCreateNewCollection }) {
     </Aside>
   );
 }
-
-Sidebar.propTypes = {
-  setIsCreateNewCollection: PropTypes.func,
-};
 
 const Aside = styled.aside`
   display: flex;

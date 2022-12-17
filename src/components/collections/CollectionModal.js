@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import EmojiPicker from 'emoji-picker-react';
 import Collection from './Collection';
-import { addCollection } from '../../redux/todoSlice';
+import { addCollection, setIsCreateNewCollection } from '../../redux/todoSlice';
 import emojiBackground from '../../assets/emojiBackground.png';
 import '../../styles/emojiPicker.css';
 
-function CollectionModal({ isCreateNewCollection, setIsCreateNewCollection }) {
+function CollectionModal({ isCreateNewCollection }) {
   const [isChooseEmoji, setIsChooseEmoji] = useState(false);
   const [emoji, setEmoji] = useState('');
   const [collectionTitle, setCollectionTitle] = useState('Collection name');
@@ -40,7 +40,7 @@ function CollectionModal({ isCreateNewCollection, setIsCreateNewCollection }) {
         name: collectionTitle,
       })
     );
-    setIsCreateNewCollection(false);
+    dispatch(setIsCreateNewCollection(false));
   };
 
   return (
@@ -76,7 +76,6 @@ function CollectionModal({ isCreateNewCollection, setIsCreateNewCollection }) {
 
 CollectionModal.propTypes = {
   isCreateNewCollection: PropTypes.bool,
-  setIsCreateNewCollection: PropTypes.func,
 };
 
 const CollectionCreator = styled.div`

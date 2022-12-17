@@ -3,10 +3,15 @@ import styled from 'styled-components';
 import Task from './Task';
 
 function TasksList() {
-  const tasks = useSelector((state) => state.collections.tasks);
+  const tasks = useSelector((state) => {
+    console.log(
+      state.collections.collections.map((collection) => collection.tasks)
+    );
+    return state.collections.tasks;
+  });
   const notCompletedTasks = tasks.filter((task) => !task.completed);
   const completedTasks = tasks.filter((task) => task.completed);
-
+  // localStorage.clear();
   return (
     <TasksWrapper>
       <TaskStats>Tasks - {notCompletedTasks.length}</TaskStats>

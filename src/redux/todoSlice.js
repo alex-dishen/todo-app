@@ -15,12 +15,16 @@ const saveToLocalStorage = (item, array) => {
   localStorage.setItem(item, JSON.stringify(array));
 };
 
+const initialState = {
+  collections: collectionsList,
+  tasks: tasksList,
+  collectionID: '',
+  isCreateNewCollection: false,
+};
+
 const todoSlice = createSlice({
   name: 'collections',
-  initialState: {
-    collections: collectionsList,
-    tasks: tasksList,
-  },
+  initialState,
   reducers: {
     addCollection: (state, action) => {
       const collection = {
@@ -28,6 +32,7 @@ const todoSlice = createSlice({
         color: action.payload.color,
         emoji: action.payload.emoji,
         name: action.payload.name,
+        tasks: tasksList,
       };
       state.collections = [...state.collections, collection];
       saveToLocalStorage('stateCollections', state.collections);
@@ -71,6 +76,14 @@ const todoSlice = createSlice({
       state.tasks[index].title = action.payload.title;
       saveToLocalStorage('stateTasks', state.tasks);
     },
+
+    setCollectionID: (state, action) => {
+      state.collectionID = action.payload;
+    },
+
+    setIsCreateNewCollection: (state, action) => {
+      state.isCreateNewCollection = action.payload;
+    },
   },
 });
 
@@ -82,6 +95,8 @@ export const {
   toggleChange,
   changeCollectionTitle,
   changeTaskTitle,
+  setCollectionID,
+  setIsCreateNewCollection,
 } = todoSlice.actions;
 
 export default todoSlice.reducer;

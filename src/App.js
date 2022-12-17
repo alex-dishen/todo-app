@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
@@ -7,11 +7,13 @@ import CollectionModal from './components/collections/CollectionModal';
 import './styles/normalize.css';
 
 function App() {
-  const [isCreateNewCollection, setIsCreateNewCollection] = useState(false);
+  const isCreateNewCollection = useSelector(
+    (state) => state.collections.isCreateNewCollection
+  );
 
   return (
     <>
-      <Sidebar setIsCreateNewCollection={setIsCreateNewCollection} />
+      <Sidebar />
       <MainWrapper>
         <Content>
           <Header />
@@ -19,10 +21,7 @@ function App() {
         </Content>
       </MainWrapper>
       {isCreateNewCollection && (
-        <CollectionModal
-          setIsCreateNewCollection={setIsCreateNewCollection}
-          isCreateNewCollection={isCreateNewCollection}
-        />
+        <CollectionModal isCreateNewCollection={isCreateNewCollection} />
       )}
     </>
   );
