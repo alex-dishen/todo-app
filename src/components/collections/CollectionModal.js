@@ -32,6 +32,10 @@ function CollectionModal({ isCreateNewCollection }) {
     setColor(e.target.value);
   };
 
+  const hideModal = () => {
+    dispatch(setIsCreateNewCollection(false));
+  };
+
   const onAddClick = () => {
     dispatch(
       addCollection({
@@ -40,7 +44,7 @@ function CollectionModal({ isCreateNewCollection }) {
         name: collectionTitle,
       })
     );
-    dispatch(setIsCreateNewCollection(false));
+    hideModal();
   };
 
   return (
@@ -67,7 +71,10 @@ function CollectionModal({ isCreateNewCollection }) {
           name={collectionTitle}
           isCreateNewCollection={isCreateNewCollection}
         />
-        <AddBtn onClick={onAddClick}>Add</AddBtn>
+        <ButtonSection>
+          <CancelBtn onClick={hideModal}>Cancel</CancelBtn>
+          <AddBtn onClick={onAddClick}>Add</AddBtn>
+        </ButtonSection>
       </CollectionCreator>
       <Overlay />
     </>
@@ -151,9 +158,13 @@ const ColorPanel = styled.input.attrs({
   }
 `;
 
-const AddBtn = styled.button`
-  width: 60px;
-  height: 30px;
+const ButtonSection = styled.div`
+  display: flex;
+  gap: 15px;
+`;
+
+const CancelBtn = styled.button`
+  padding: 6px 12px;
   margin-top: 20px;
   background-color: transparent;
   color: white;
@@ -161,6 +172,8 @@ const AddBtn = styled.button`
   border-radius: 10px;
   cursor: pointer;
 `;
+
+const AddBtn = styled(CancelBtn)``;
 
 const Overlay = styled.div`
   position: absolute;

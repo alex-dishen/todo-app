@@ -3,15 +3,19 @@ import styled from 'styled-components';
 import Task from './Task';
 
 function TasksList() {
-  const tasks = useSelector((state) => {
-    console.log(
-      state.collections.collections.map((collection) => collection.tasks)
-    );
-    return state.collections.tasks;
-  });
-  const notCompletedTasks = tasks.filter((task) => !task.completed);
-  const completedTasks = tasks.filter((task) => task.completed);
   // localStorage.clear();
+  const collections = useSelector((state) => state.collections.collections);
+  const currentCollectionID = useSelector(
+    (state) => state.collections.collectionID
+  );
+  const currentCollection = collections.filter(
+    (collection) => collection.id === currentCollectionID
+  );
+  const currentTasks =
+    currentCollectionID === '' ? [] : currentCollection[0].tasks;
+
+  const notCompletedTasks = currentTasks.filter((task) => !task.completed);
+  const completedTasks = currentTasks.filter((task) => task.completed);
   return (
     <TasksWrapper>
       <TaskStats>Tasks - {notCompletedTasks.length}</TaskStats>

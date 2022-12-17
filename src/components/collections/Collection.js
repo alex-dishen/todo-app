@@ -1,11 +1,15 @@
 import { Emoji, EmojiStyle } from 'emoji-picker-react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setCollectionID } from '../../redux/todoSlice';
 
 function Collection({ id, color, emoji, name, isCreateNewCollection }) {
   const dispatch = useDispatch();
+
+  const currentCollectionID = useSelector(
+    (state) => state.collections.collectionID
+  );
 
   const getCollectionId = () => {
     dispatch(setCollectionID(id));
@@ -14,6 +18,8 @@ function Collection({ id, color, emoji, name, isCreateNewCollection }) {
   return (
     <CollectionWrapper
       isCreateNewCollection={isCreateNewCollection}
+      currentCollectionID={currentCollectionID}
+      id={id}
       onClick={getCollectionId}
     >
       <EmojiHolder color={color}>
@@ -37,21 +43,24 @@ const CollectionWrapper = styled.div`
   align-items: center;
   padding: 10px 15px;
   gap: 10px;
+  background-color: ${(props) =>
+    props.currentCollectionID === props.id ? 'rgb(56, 56, 56)' : 'transparent'};
   cursor: ${(props) => (props.isCreateNewCollection ? 'auto' : 'pointer')};
 
   &:hover {
     background-color: ${(props) =>
-      props.isCreateNewCollection ? 'transparent' : 'white'};
+      props.isCreateNewCollection ? 'transparent' : 'rgb(56, 56, 56)'};
   }
 `;
 
-const EmojiHolder = styled.div`
+const EmojiHolder = styled.div.attrs((props) => ({
+  style: { background: props.color },
+}))`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 40px;
   width: 40px;
-  background-color: ${(props) => props.color};
   border-radius: 6px;
 `;
 
