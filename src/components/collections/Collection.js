@@ -44,12 +44,12 @@ const CollectionWrapper = styled.div`
   padding: 10px 15px;
   gap: 10px;
   background-color: ${(props) =>
-    props.currentCollectionID === props.id ? 'rgb(56, 56, 56)' : 'transparent'};
+    props.currentCollectionID === props.id ? 'rgb(45, 45, 45)' : 'transparent'};
   cursor: ${(props) => (props.isCreateNewCollection ? 'auto' : 'pointer')};
 
   &:hover {
     background-color: ${(props) =>
-      props.isCreateNewCollection ? 'transparent' : 'rgb(56, 56, 56)'};
+      props.isCreateNewCollection ? 'transparent' : 'rgb(45, 45, 45)'};
   }
 `;
 

@@ -5,7 +5,7 @@ const GlobalStyle = styled.createGlobalStyle`
     height: 100vh;
     display: flex;
     justify-content: center;
-    background-color: rgb(24, 24, 31);
+    background-color: rgb(25, 25, 25);
     font-family: Sen;
   }
 

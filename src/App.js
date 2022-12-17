@@ -7,8 +7,11 @@ import CollectionModal from './components/collections/CollectionModal';
 import './styles/normalize.css';
 
 function App() {
-  const isCreateNewCollection = useSelector(
-    (state) => state.collections.isCreateNewCollection
+  const collections = useSelector((state) => state.collections);
+  const { isCreateNewCollection } = collections;
+  const currentCollectionID = collections.collectionID;
+  const currentCollection = collections.collections.filter(
+    (collection) => collection.id === currentCollectionID
   );
 
   return (
@@ -16,7 +19,10 @@ function App() {
       <Sidebar />
       <MainWrapper>
         <Content>
-          <Header />
+          <Header
+            currentCollectionID={currentCollectionID}
+            currentCollection={currentCollection}
+          />
           <TasksList />
         </Content>
       </MainWrapper>

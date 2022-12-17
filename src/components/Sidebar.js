@@ -26,9 +26,9 @@ const Aside = styled.aside`
   justify-content: space-between;
   width: 230px;
   padding: 30px 0;
-  background-color: rgb(33, 33, 42);
+  background-color: rgb(32, 32, 32);
   color: white;
-  grid-area: sidebar;
+  border-right: 1px solid rgb(43, 43, 43);
 `;
 
 const Div = styled.div`

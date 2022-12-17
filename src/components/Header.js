@@ -20,6 +20,8 @@ function Header() {
     currentCollectionID !== '' ? currentCollection[0].name : '';
   const collectionEmoji =
     currentCollectionID !== '' ? currentCollection[0].emoji : '';
+  const collectionColor =
+    currentCollectionID !== '' ? currentCollection[0].color : '';
 
   const updateCollectionName = (e) => {
     dispatch(updateCollection({ name: e.target.value }));
@@ -61,7 +63,7 @@ function Header() {
         </CollectionIdentity>
         <Bin onClick={deleteColl} />
       </Collection>
-      <Form />
+      <Form color={collectionColor} />
     </HeaderWrapper>
   );
 }

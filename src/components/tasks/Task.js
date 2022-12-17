@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
@@ -17,6 +17,14 @@ function Task({ id, title, completed }) {
   useEffect(() => {
     expendTextArea();
   }, []);
+
+  const collections = useSelector((state) => state.collections);
+  const currentCollectionID = collections.collectionID;
+  const currentCollection = collections.collections.filter(
+    (collection) => collection.id === currentCollectionID
+  );
+  const collectionColor =
+    currentCollectionID !== '' ? currentCollection[0].color : '';
 
   const handleCompletedClick = () => {
     dispatch(toggleComplete({ id, completed: !completed }));
@@ -46,6 +54,7 @@ function Task({ id, title, completed }) {
           type="checkbox"
           checked={completed}
           onChange={handleCompletedClick}
+          color={collectionColor}
         />
         <TextAreaWrapper>
           <TextArea
@@ -80,7 +89,7 @@ const TaskWrapper = styled(motion.div)`
   min-height: 55px;
   padding: 10px 15px 10px 15px;
   margin-bottom: 13px;
-  background-color: rgb(33, 33, 42);
+  background-color: rgb(40, 40, 40);
   border-radius: 15px;
 `;
 
@@ -95,12 +104,12 @@ const CheckBox = styled.input`
   min-width: 23px;
   height: 23px;
   place-content: center;
-  border: 2px solid rgb(71, 155, 65);
+  border: 2px solid ${(props) => props.color};
   border-radius: 7px;
   cursor: pointer;
 
   &:checked {
-    background-color: rgb(71, 155, 65);
+    background-color: ${(props) => props.color};
   }
 
   &::before {
@@ -109,7 +118,7 @@ const CheckBox = styled.input`
     height: 0.65em;
     clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
     transform: scale(0);
-    box-shadow: inset 1em 1em rgb(33, 33, 41);
+    box-shadow: inset 1em 1em rgb(40, 40, 40);
   }
 
   &:checked::before {

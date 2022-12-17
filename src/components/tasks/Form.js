@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { addTask } from '../../redux/todoSlice';
 
-function Form() {
+function Form({ color }) {
   const [value, setValue] = useState('');
   const dispatch = useDispatch();
 
@@ -22,11 +23,7 @@ function Form() {
 
   return (
     <FormWrapper>
-      <AddButton
-        onClick={(e) => {
-          onAddClick(e);
-        }}
-      >
+      <AddButton onClick={onAddClick} color={color}>
         +
       </AddButton>
       <Input
@@ -42,6 +39,10 @@ function Form() {
   );
 }
 
+Form.propTypes = {
+  color: PropTypes.string,
+};
+
 const FormWrapper = styled.form`
   display: flex;
   align-items: center;
@@ -49,7 +50,7 @@ const FormWrapper = styled.form`
   width: 100%;
   gap: 10px;
   padding: 20px 8px;
-  border: 3px solid rgb(29, 29, 38);
+  border: 3px solid rgb(43, 43, 43);
   border-radius: 13px;
 `;
 
@@ -67,6 +68,7 @@ const Input = styled.input`
 const AddButton = styled.button`
   padding: 3px 10px;
   background-color: #099d32;
+  background-color: ${(props) => props.color};
   color: black;
   font-size: 18px;
   border: none;
