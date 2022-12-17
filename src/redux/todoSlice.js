@@ -25,6 +25,10 @@ const todoSlice = createSlice({
   name: 'collections',
   initialState,
   reducers: {
+    setIsCreateNewCollection: (state, action) => {
+      state.isCreateNewCollection = action.payload;
+    },
+
     addCollection: (state, action) => {
       const collection = {
         id: uniqid(),
@@ -35,7 +39,37 @@ const todoSlice = createSlice({
       };
       state.collections = [...state.collections, collection];
       saveToLocalStorage('stateCollections', state.collections);
-      console.log(collectionsList);
+    },
+
+    setCollectionID: (state, action) => {
+      state.collectionID = action.payload;
+      saveToLocalStorage('stateCollectionID', state.collectionID);
+    },
+
+    updateCollection: (state, action) => {
+      const index = state.collections.findIndex(
+        (collection) => collection.id === currentCollectionID
+      );
+
+      if (action.payload.name) {
+        state.collections[index].name = action.payload.name;
+      } else {
+        state.collections[index].emoji = action.payload.emoji;
+      }
+      saveToLocalStorage('stateCollections', state.collections);
+    },
+
+    deleteCollection: (state, action) => {
+      state.collections = state.collections.filter(
+        (collection) => collection.id !== action.payload
+      );
+      // collectionID is set here to prevent app from crashing after
+      // collection was deleted or if there are no collections
+      state.collectionID =
+        state.collections.length === 0 ? '' : state.collections[0].id;
+
+      saveToLocalStorage('stateCollectionID', state.collectionID);
+      saveToLocalStorage('stateCollections', state.collections);
     },
 
     addTask: (state, action) => {
@@ -70,32 +104,9 @@ const todoSlice = createSlice({
     },
 
     // ?????
-    deleteCollection: (state, action) => {
-      state.collections = state.collections.filter(
-        (collection) => collection.id !== action.payload
-      );
-    },
-
-    // ?????
     deleteTask: (state, action) => {
       state.tasks = state.tasks.filter((task) => task.id !== action.payload.id);
       saveToLocalStorage('stateTasks', state.tasks);
-    },
-
-    changeCollectionTitle: (state, action) => {
-      const index = state.collections.findIndex(
-        (collection) => collection.id === currentCollectionID
-      );
-      state.collections[index].name = action.payload;
-      saveToLocalStorage('stateCollections', state.collections);
-    },
-
-    changeEmoji: (state, action) => {
-      const index = state.collections.findIndex(
-        (collection) => collection.id === currentCollectionID
-      );
-      state.collections[index].emoji = action.payload;
-      saveToLocalStorage('stateCollections', state.collections);
     },
 
     // ??????
@@ -107,30 +118,20 @@ const todoSlice = createSlice({
       state.tasks[index].title = action.payload.title;
       // saveToLocalStorage('stateTasks', state.tasks);
     },
-
-    setCollectionID: (state, action) => {
-      state.collectionID = action.payload;
-      saveToLocalStorage('stateCollectionID', state.collectionID);
-    },
-
-    setIsCreateNewCollection: (state, action) => {
-      state.isCreateNewCollection = action.payload;
-    },
   },
 });
 
 export const {
+  setIsCreateNewCollection,
   addCollection,
+  setCollectionID,
+  updateCollection,
+  deleteCollection,
+
   addTask,
   toggleComplete,
-  deleteCollection,
-  deleteTask,
-  toggleChange,
-  changeCollectionTitle,
   changeTaskTitle,
-  setCollectionID,
-  setIsCreateNewCollection,
-  changeEmoji,
+  deleteTask,
 } = todoSlice.actions;
 
 export default todoSlice.reducer;

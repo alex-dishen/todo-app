@@ -1,14 +1,10 @@
-import styled from 'styled-components';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import EmojiPicker, { Emoji, EmojiStyle } from 'emoji-picker-react';
-import { useState } from 'react';
+import styled from 'styled-components';
 import Form from './tasks/Form';
 import { ReactComponent as Trash } from '../assets/bin.svg';
-import {
-  deleteCollection,
-  changeCollectionTitle,
-  changeEmoji,
-} from '../redux/todoSlice';
+import { deleteCollection, updateCollection } from '../redux/todoSlice';
 import '../styles/emojiPicker.css';
 
 function Header() {
@@ -20,17 +16,23 @@ function Header() {
   const currentCollection = collections.collections.filter(
     (collection) => collection.id === currentCollectionID
   );
-  const collectionName = currentCollection[0].name;
-  const collectionEmoji = currentCollection[0].emoji;
+  const collectionName =
+    currentCollectionID !== '' ? currentCollection[0].name : '';
+  const collectionEmoji =
+    currentCollectionID !== '' ? currentCollection[0].emoji : '';
 
   const updateCollectionName = (e) => {
-    dispatch(changeCollectionTitle(e.target.value));
+    dispatch(updateCollection({ name: e.target.value }));
   };
   const deleteColl = () => {
     dispatch(deleteCollection(currentCollectionID));
   };
   const chooseEmoji = (EmojiClickData) => {
-    dispatch(changeEmoji(EmojiClickData.unified));
+    dispatch(
+      updateCollection({
+        emoji: EmojiClickData.unified,
+      })
+    );
     setIsChooseEmoji(false);
   };
 
