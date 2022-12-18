@@ -11,10 +11,10 @@ function Sidebar() {
 
   return (
     <Aside>
-      <div>
-        <Div>Collections</Div>
+      <Div>Collections</Div>
+      <CollectionsListWrapper>
         <CollectionList />
-      </div>
+      </CollectionsListWrapper>
       <AddButton onClick={openModal}>+</AddButton>
     </Aside>
   );
@@ -25,10 +25,18 @@ const Aside = styled.aside`
   flex-direction: column;
   justify-content: space-between;
   width: 230px;
-  padding: 30px 0;
+  padding: 20px 0;
   background-color: rgb(32, 32, 32);
   color: white;
   border-right: 1px solid rgb(43, 43, 43);
+`;
+
+const CollectionsListWrapper = styled.div`
+  height: 100%;
+  margin-bottom: 20px;
+  overflow: scroll;
+  border-top: 1px solid rgb(43, 43, 43);
+  border-bottom: 1px solid rgb(43, 43, 43);
 `;
 
 const Div = styled.div`

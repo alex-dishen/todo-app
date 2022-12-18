@@ -6,18 +6,23 @@ The **To-Do** project is created according to the assignment from **DomDev** [co
 ### 🔗 **Live preview** of the project is [here](https://alex-dishen.github.io/todo-app/).
 
 ## **Features**
-* Create todo
-* Update todo write where it is
-* Delete todo
-* Check accomplished tasks 
+* Create collection
+* Update collection's name
+* Delete collection
+* Store tasks inside collections
+* Create task
+* Update task's name just by clicking on it
+* Check task as accomplished
+* Delete task
 * Local storage
 
 ## **Outcome**
 * Used **React**
 * Used **Redux Toolkit**
 * Used **StyledComponents**
-* Learned why we need Redux and how to use it
-* Learned StyledComponents
+* Learned how to use Redux
+* Learned StyledComponents way of styling
+* Improved skills of storing and retrieving data
 
 ## **Getting Started**
 ```
