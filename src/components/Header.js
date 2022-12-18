@@ -55,7 +55,7 @@ function Header() {
           </EmojiHolder>
           <CollectionName
             onInput={updateCollectionName}
-            defaultValue={collectionName}
+            value={collectionName}
           />
           {isChooseEmoji && (
             <EmojiPicker height={320} onEmojiClick={chooseEmoji} />

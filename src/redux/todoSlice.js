@@ -48,7 +48,7 @@ const todoSlice = createSlice({
 
     updateCollection: (state, action) => {
       const index = state.collections.findIndex(
-        (collection) => collection.id === currentCollectionID
+        (collection) => collection.id === state.collectionID
       );
 
       if (action.payload.name) {
@@ -89,27 +89,34 @@ const todoSlice = createSlice({
       saveToLocalStorage('stateCollections', state.collections);
     },
 
-    updateTask: (state, action) => {
+    toggleComplete: (state, action) => {
       const collectionIndex = state.collections.findIndex(
-        (collection) => collection.id === currentCollectionID
+        (collection) => collection.id === state.collectionID
       );
       const taskIndex = state.collections[collectionIndex].tasks.findIndex(
         (task) => task.id === action.payload.id
       );
+      state.collections[collectionIndex].tasks[taskIndex].completed =
+        action.payload.completed;
 
-      if (action.payload.completed) {
-        state.collections[collectionIndex].tasks[taskIndex].completed =
-          action.payload.completed;
-      } else {
-        state.collections[collectionIndex].tasks[taskIndex].title =
-          action.payload.title;
-      }
+      saveToLocalStorage('stateCollections', state.collections);
+    },
+
+    changeTaskTitle: (state, action) => {
+      const collectionIndex = state.collections.findIndex(
+        (collection) => collection.id === state.collectionID
+      );
+      const taskIndex = state.collections[collectionIndex].tasks.findIndex(
+        (task) => task.id === action.payload.id
+      );
+      state.collections[collectionIndex].tasks[taskIndex].title =
+        action.payload.title;
       saveToLocalStorage('stateCollections', state.collections);
     },
 
     deleteTask: (state, action) => {
       const index = state.collections.findIndex(
-        (collection) => collection.id === currentCollectionID
+        (collection) => collection.id === state.collectionID
       );
       state.collections[index].tasks = state.collections[index].tasks.filter(
         (task) => task.id !== action.payload.id
@@ -127,7 +134,8 @@ export const {
   deleteCollection,
 
   addTask,
-  updateTask,
+  toggleComplete,
+  changeTaskTitle,
   deleteTask,
 } = todoSlice.actions;
 
