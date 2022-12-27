@@ -7,28 +7,20 @@ import CollectionModal from './components/collections/CollectionModal';
 import './styles/normalize.css';
 
 function App() {
+  // localStorage.clear();
   const collections = useSelector((state) => state.collections);
   const { isCreateNewCollection } = collections;
-  const currentCollectionID = collections.collectionID;
-  const currentCollection = collections.collections.filter(
-    (collection) => collection.id === currentCollectionID
-  );
 
   return (
     <>
       <Sidebar />
       <MainWrapper>
         <Content>
-          <Header
-            currentCollectionID={currentCollectionID}
-            currentCollection={currentCollection}
-          />
+          <Header />
           <TasksList />
         </Content>
       </MainWrapper>
-      {isCreateNewCollection && (
-        <CollectionModal isCreateNewCollection={isCreateNewCollection} />
-      )}
+      {isCreateNewCollection && <CollectionModal />}
     </>
   );
 }

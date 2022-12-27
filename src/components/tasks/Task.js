@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
@@ -10,21 +10,13 @@ import {
 } from '../../redux/todoSlice';
 import { ReactComponent as Bin } from '../../assets/bin.svg';
 
-function Task({ id, title, completed }) {
+function Task({ id, title, completed, color }) {
   const dispatch = useDispatch();
   const inputRef = useRef();
 
   useEffect(() => {
     expendTextArea();
   }, []);
-
-  const collections = useSelector((state) => state.collections);
-  const currentCollectionID = collections.collectionID;
-  const currentCollection = collections.collections.filter(
-    (collection) => collection.id === currentCollectionID
-  );
-  const collectionColor =
-    currentCollectionID !== '' ? currentCollection[0].color : '';
 
   const handleCompletedClick = () => {
     dispatch(toggleComplete({ id, completed: !completed }));
@@ -54,7 +46,7 @@ function Task({ id, title, completed }) {
           type="checkbox"
           checked={completed}
           onChange={handleCompletedClick}
-          color={collectionColor}
+          color={color}
         />
         <TextAreaWrapper>
           <TextArea
@@ -80,6 +72,7 @@ Task.propTypes = {
   id: PropTypes.string,
   title: PropTypes.string,
   completed: PropTypes.bool,
+  color: PropTypes.string,
 };
 
 const TaskWrapper = styled(motion.div)`

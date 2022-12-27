@@ -14,10 +14,18 @@ const currentCollectionID =
 const saveToLocalStorage = (item, array) => {
   localStorage.setItem(item, JSON.stringify(array));
 };
+
+const findCollectionIndex = (state) =>
+  state.collections.findIndex(
+    (collection) => collection.id === state.collectionID
+  );
+
 const initialState = {
   collections: collectionsList,
   collectionID: currentCollectionID,
   isCreateNewCollection: false,
+  currentColor: '#128200',
+  currentEmoji: '',
 };
 
 const todoSlice = createSlice({
@@ -40,22 +48,38 @@ const todoSlice = createSlice({
       saveToLocalStorage('stateCollections', state.collections);
     },
 
+    setCollectionTitle: (state, action) => {
+      const index = findCollectionIndex(state);
+
+      state.collections[index].name = action.payload.name;
+      saveToLocalStorage('stateCollections', state.collections);
+    },
+
+    setCollectionColor: (state, action) => {
+      const index = findCollectionIndex(state);
+
+      if (!state.isCreateNewCollection) {
+        state.collections[index].color = action.payload;
+      } else {
+        state.currentColor = action.payload;
+      }
+      saveToLocalStorage('stateCollections', state.collections);
+    },
+
+    setCollectionEmoji: (state, action) => {
+      const index = findCollectionIndex(state);
+
+      if (!state.isCreateNewCollection) {
+        state.collections[index].emoji = action.payload;
+      } else {
+        state.currentEmoji = action.payload;
+      }
+      saveToLocalStorage('stateCollections', state.collections);
+    },
+
     setCollectionID: (state, action) => {
       state.collectionID = action.payload;
       saveToLocalStorage('stateCollectionID', state.collectionID);
-    },
-
-    updateCollection: (state, action) => {
-      const index = state.collections.findIndex(
-        (collection) => collection.id === state.collectionID
-      );
-
-      if (action.payload.name) {
-        state.collections[index].name = action.payload.name;
-      } else {
-        state.collections[index].emoji = action.payload.emoji;
-      }
-      saveToLocalStorage('stateCollections', state.collections);
     },
 
     deleteCollection: (state, action) => {
@@ -128,8 +152,10 @@ const todoSlice = createSlice({
 export const {
   setIsCreateNewCollection,
   addCollection,
+  setCollectionTitle,
+  setCollectionColor,
+  setCollectionEmoji,
   setCollectionID,
-  updateCollection,
   deleteCollection,
 
   addTask,

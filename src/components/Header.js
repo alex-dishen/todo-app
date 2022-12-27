@@ -1,11 +1,10 @@
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Emoji, EmojiStyle } from 'emoji-picker-react';
 import styled from 'styled-components';
 import Form from './tasks/Form';
 import Customization from './Customization';
 import { ReactComponent as Trash } from '../assets/bin.svg';
-import { deleteCollection, updateCollection } from '../redux/todoSlice';
+import { deleteCollection, setCollectionTitle } from '../redux/todoSlice';
 
 function Header() {
   const dispatch = useDispatch();
@@ -15,6 +14,7 @@ function Header() {
   const currentCollection = collections.collections.filter(
     (collection) => collection.id === currentCollectionID
   );
+
   const collectionName =
     currentCollectionID !== '' ? currentCollection[0].name : '';
   const collectionEmoji =
@@ -23,19 +23,11 @@ function Header() {
     currentCollectionID !== '' ? currentCollection[0].color : '';
 
   const updateCollectionName = (e) => {
-    dispatch(updateCollection({ name: e.target.value }));
+    dispatch(setCollectionTitle({ name: e.target.value }));
   };
   const deleteColl = () => {
     dispatch(deleteCollection(currentCollectionID));
   };
-  // const chooseEmoji = (EmojiClickData) => {
-  //   dispatch(
-  //     updateCollection({
-  //       emoji: EmojiClickData.unified,
-  //     })
-  //   );
-  //   setIsChooseEmoji(false);
-  // };
 
   return (
     <HeaderWrapper>
@@ -69,6 +61,7 @@ const Collection = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 6px;
   font-weight: 600;
   font-size: 32px;
 `;
@@ -77,11 +70,6 @@ const CollectionIdentity = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
-`;
-
-const EmojiHolder = styled.div`
-  height: 32px;
-  cursor: pointer;
 `;
 
 const CollectionName = styled.input`

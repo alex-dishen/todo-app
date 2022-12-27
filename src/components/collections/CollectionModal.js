@@ -1,24 +1,18 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Collection from './Collection';
 import Customization from '../Customization';
 import { addCollection, setIsCreateNewCollection } from '../../redux/todoSlice';
-import emojiBackground from '../../assets/emojiBackground.png';
 
-function CollectionModal({ isCreateNewCollection }) {
-  const [emoji, setEmoji] = useState('');
-  const [collectionTitle, setCollectionTitle] = useState('Collection name');
-  const [color, setColor] = useState('#099d32');
+function CollectionModal() {
   const dispatch = useDispatch();
+  const collections = useSelector((state) => state.collections);
+  const { currentColor, currentEmoji, isCreateNewCollection } = collections;
+  const [collectionTitle, setCollectionTitle] = useState('Collection name');
 
   const changeCollectionTitle = (e) => {
     setCollectionTitle(e.target.value);
-  };
-
-  const changeColor = (e) => {
-    setColor(e.target.value);
   };
 
   const hideModal = () => {
@@ -28,8 +22,8 @@ function CollectionModal({ isCreateNewCollection }) {
   const onAddClick = () => {
     dispatch(
       addCollection({
-        color,
-        emoji,
+        color: currentColor,
+        emoji: currentEmoji,
         name: collectionTitle,
       })
     );
@@ -41,14 +35,10 @@ function CollectionModal({ isCreateNewCollection }) {
       <CollectionCreator>
         <h1>New Collection</h1>
         <Input onInput={changeCollectionTitle} />
-        <BeautySection>
-          <ColorPanel onChange={changeColor} value={color} />
-        </BeautySection>
         <Customization />
-
         <Collection
-          color={color}
-          emoji={emoji}
+          color={currentColor}
+          emoji={currentEmoji}
           name={collectionTitle}
           isCreateNewCollection={isCreateNewCollection}
         />
@@ -61,10 +51,6 @@ function CollectionModal({ isCreateNewCollection }) {
     </>
   );
 }
-
-CollectionModal.propTypes = {
-  isCreateNewCollection: PropTypes.bool,
-};
 
 const CollectionCreator = styled.div`
   position: absolute;
@@ -79,6 +65,7 @@ const CollectionCreator = styled.div`
 
   width: 360px;
   padding: 10px 30px 30px 30px;
+  gap: 10px;
   background-color: rgb(32, 32, 32);
   border-radius: 20px;
 `;
@@ -89,6 +76,7 @@ const Input = styled.input.attrs({
 })`
   width: 100%;
   padding: 6px;
+  margin-bottom: 20px;
   background-color: transparent;
   text-align: center;
   color: white;
@@ -96,47 +84,6 @@ const Input = styled.input.attrs({
   border: hidden;
   border-bottom: groove;
   border-radius: 11px;
-`;
-
-const BeautySection = styled.div`
-  display: flex;
-  align-items: center;
-  margin: 20px 0;
-  gap: 15px;
-`;
-
-const EmojiBtn = styled.button.attrs({
-  type: 'button',
-})`
-  height: 50px;
-  width: 50px;
-  background-image: url(${emojiBackground});
-  background-size: cover;
-  background-position: center;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-`;
-
-const ColorPanel = styled.input.attrs({
-  type: 'color',
-})`
-  height: 60px;
-  width: 60px;
-  background-color: transparent;
-  border: none;
-  border-radius: 50%;
-  transition: 0.3s;
-  cursor: pointer;
-
-  &::-webkit-color-swatch {
-    border-radius: 50%;
-    border: none;
-  }
-
-  &:hover {
-    transform: scale(1.1);
-  }
 `;
 
 const ButtonSection = styled.div`

@@ -1,42 +1,28 @@
-aside.EmojiPickerReact.epr-main, 
-.custom-layout {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, 8%);
+.EmojiPickerReact.epr-main {
+  margin-top: -8px;
+  margin-bottom: -8px;
 }
 
 div.Flex.epr-preview.FlexRow {
     display: none;
 }
 
-.custom-layout .react-colorful__saturation {
-  margin: 15px 0;
+.color-panel .react-colorful__saturation {
+  margin-bottom: 15px;
   border-radius: 5px;
   border-bottom: none;
 }
 
-.custom-layout .react-colorful__hue {
-  margin-bottom: 15px;
-}
-
-.custom-layout .react-colorful__hue,
-.custom-layout .react-colorful__alpha {
+.color-panel .react-colorful__hue,
+.color-panel .react-colorful__alpha {
   height: 14px;
   border-radius: 5px;
 }
 
-.custom-layout .react-colorful__hue-pointer,
-.custom-layout .react-colorful__alpha-pointer,
-.custom-layout .react-colorful__saturation-pointer {
+.color-panel .react-colorful__hue-pointer,
+.color-panel .react-colorful__alpha-pointer,
+.color-panel .react-colorful__saturation-pointer {
   width: 15px;
   height: 15px;
   cursor: pointer;
-}
-
-.custom-layout {
-  padding: 20px;
-  background-color: rgb(40, 40, 40);
-  border-radius: 20px;
-  box-shadow:  0px 5px 10px rgb(15, 15, 15), -0px -5px 10px rgb(15, 15, 15);
 }

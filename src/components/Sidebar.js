@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
 import CollectionList from './collections/CollectionList';
 import { setIsCreateNewCollection } from '../redux/todoSlice';
 import { ReactComponent as AddSign } from '../assets/plus.svg';

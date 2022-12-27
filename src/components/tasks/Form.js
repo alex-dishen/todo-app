@@ -50,6 +50,7 @@ const FormWrapper = styled.form`
   width: 100%;
   gap: 10px;
   padding: 20px 8px;
+  margin-top: 20px;
   border: 3px solid rgb(43, 43, 43);
   border-radius: 13px;
 `;

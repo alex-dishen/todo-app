@@ -3,19 +3,20 @@ import styled from 'styled-components';
 import Task from './Task';
 
 function TasksList() {
-  // localStorage.clear();
-  const collections = useSelector((state) => state.collections.collections);
-  const currentCollectionID = useSelector(
-    (state) => state.collections.collectionID
-  );
-  const currentCollection = collections.filter(
+  const collections = useSelector((state) => state.collections);
+  const currentCollectionID = collections.collectionID;
+  const currentCollection = collections.collections.filter(
     (collection) => collection.id === currentCollectionID
   );
+
   const currentTasks =
     currentCollectionID === '' ? [] : currentCollection[0].tasks;
+  const collectionColor =
+    currentCollectionID !== '' ? currentCollection[0].color : '';
 
   const notCompletedTasks = currentTasks.filter((task) => !task.completed);
   const completedTasks = currentTasks.filter((task) => task.completed);
+
   return (
     <TasksWrapper>
       <TaskStats>Tasks - {notCompletedTasks.length}</TaskStats>
@@ -25,6 +26,7 @@ function TasksList() {
           id={task.id}
           title={task.title}
           completed={task.completed}
+          color={collectionColor}
         />
       ))}
       <TaskStats>Completed - {completedTasks.length}</TaskStats>
@@ -34,6 +36,7 @@ function TasksList() {
           id={task.id}
           title={task.title}
           completed={task.completed}
+          color={collectionColor}
         />
       ))}
     </TasksWrapper>

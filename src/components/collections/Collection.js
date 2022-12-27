@@ -1,7 +1,7 @@
+import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Emoji, EmojiStyle } from 'emoji-picker-react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
 import { setCollectionID } from '../../redux/todoSlice';
 
 function Collection({ id, color, emoji, name, isCreateNewCollection }) {
@@ -12,7 +12,9 @@ function Collection({ id, color, emoji, name, isCreateNewCollection }) {
   );
 
   const getCollectionId = () => {
-    dispatch(setCollectionID(id));
+    // The conditional is used here to prevent the app from crushing if user
+    // clicks on collection in collectionModal
+    if (!isCreateNewCollection) dispatch(setCollectionID(id));
   };
 
   return (
