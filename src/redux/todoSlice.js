@@ -6,15 +6,14 @@ const collectionsList =
     ? JSON.parse(localStorage.getItem('stateCollections'))
     : [];
 
-const saveToLocalStorage = (item, array) => {
-  localStorage.setItem(item, JSON.stringify(array));
-};
-
 const currentCollectionID =
   localStorage.getItem('stateCollectionID') !== null
     ? JSON.parse(localStorage.getItem('stateCollectionID'))
     : '';
 
+const saveToLocalStorage = (item, array) => {
+  localStorage.setItem(item, JSON.stringify(array));
+};
 const initialState = {
   collections: collectionsList,
   collectionID: currentCollectionID,

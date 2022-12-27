@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import CollectionList from './collections/CollectionList';
 import { setIsCreateNewCollection } from '../redux/todoSlice';
+import { ReactComponent as AddSign } from '../assets/plus.svg';
 
 function Sidebar() {
   const dispatch = useDispatch();
@@ -15,7 +16,9 @@ function Sidebar() {
       <CollectionsListWrapper>
         <CollectionList />
       </CollectionsListWrapper>
-      <AddButton onClick={openModal}>+</AddButton>
+      <AddSection onClick={openModal}>
+        <Plus /> New Collection
+      </AddSection>
     </Aside>
   );
 }
@@ -23,9 +26,8 @@ function Sidebar() {
 const Aside = styled.aside`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   width: 230px;
-  padding: 20px 0;
+  padding-top: 20px;
   background-color: rgb(32, 32, 32);
   color: white;
   border-right: 1px solid rgb(43, 43, 43);
@@ -33,7 +35,6 @@ const Aside = styled.aside`
 
 const CollectionsListWrapper = styled.div`
   height: 100%;
-  margin-bottom: 20px;
   overflow: scroll;
   border-top: 1px solid rgb(43, 43, 43);
   border-bottom: 1px solid rgb(43, 43, 43);
@@ -43,16 +44,27 @@ const Div = styled.div`
   padding: 10px 15px;
 `;
 
-const AddButton = styled.button`
-  height: 40px;
-  width: 40px;
-  margin: 0 auto;
-  background-color: #099d32;
-  color: white;
-  font-size: 25px;
-  border: none;
-  border-radius: 8px;
+const AddSection = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  width: 100%;
+  color: rgb(130, 130, 130);
+  font-size: 16px;
   cursor: pointer;
+
+  &:hover {
+    background-color: rgb(38, 38, 38);
+  }
+  &:active {
+    background-color: rgb(36, 36, 36);
+  }
+`;
+
+const Plus = styled(AddSign)`
+  height: 22px;
+  fill: rgb(130, 130, 130);
 `;
 
 export default Sidebar;

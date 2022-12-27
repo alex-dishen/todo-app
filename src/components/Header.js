@@ -1,16 +1,15 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import EmojiPicker, { Emoji, EmojiStyle } from 'emoji-picker-react';
+import { Emoji, EmojiStyle } from 'emoji-picker-react';
 import styled from 'styled-components';
 import Form from './tasks/Form';
+import Customization from './Customization';
 import { ReactComponent as Trash } from '../assets/bin.svg';
 import { deleteCollection, updateCollection } from '../redux/todoSlice';
-import '../styles/emojiPicker.css';
 
 function Header() {
   const dispatch = useDispatch();
   const collections = useSelector((state) => state.collections);
-  const [isChooseEmoji, setIsChooseEmoji] = useState(false);
 
   const currentCollectionID = collections.collectionID;
   const currentCollection = collections.collections.filter(
@@ -29,40 +28,32 @@ function Header() {
   const deleteColl = () => {
     dispatch(deleteCollection(currentCollectionID));
   };
-  const chooseEmoji = (EmojiClickData) => {
-    dispatch(
-      updateCollection({
-        emoji: EmojiClickData.unified,
-      })
-    );
-    setIsChooseEmoji(false);
-  };
-
-  const openEmojiPanel = () => {
-    setIsChooseEmoji(true);
-  };
+  // const chooseEmoji = (EmojiClickData) => {
+  //   dispatch(
+  //     updateCollection({
+  //       emoji: EmojiClickData.unified,
+  //     })
+  //   );
+  //   setIsChooseEmoji(false);
+  // };
 
   return (
     <HeaderWrapper>
       <Collection>
         <CollectionIdentity>
-          <EmojiHolder onClick={openEmojiPanel}>
-            <Emoji
-              unified={collectionEmoji}
-              emojiStyle={EmojiStyle.APPLE}
-              size={32}
-            />
-          </EmojiHolder>
+          <Emoji
+            unified={collectionEmoji}
+            emojiStyle={EmojiStyle.APPLE}
+            size={32}
+          />
           <CollectionName
             onInput={updateCollectionName}
             value={collectionName}
           />
-          {isChooseEmoji && (
-            <EmojiPicker height={320} onEmojiClick={chooseEmoji} />
-          )}
         </CollectionIdentity>
         <Bin onClick={deleteColl} />
       </Collection>
+      <Customization />
       <Form color={collectionColor} />
     </HeaderWrapper>
   );
@@ -71,7 +62,6 @@ function Header() {
 const HeaderWrapper = styled.header`
   display: flex;
   flex-direction: column;
-  gap: 20px;
   margin-bottom: 10px;
 `;
 

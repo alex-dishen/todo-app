@@ -2,27 +2,16 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import EmojiPicker from 'emoji-picker-react';
 import Collection from './Collection';
+import Customization from '../Customization';
 import { addCollection, setIsCreateNewCollection } from '../../redux/todoSlice';
 import emojiBackground from '../../assets/emojiBackground.png';
-import '../../styles/emojiPicker.css';
 
 function CollectionModal({ isCreateNewCollection }) {
-  const [isChooseEmoji, setIsChooseEmoji] = useState(false);
   const [emoji, setEmoji] = useState('');
   const [collectionTitle, setCollectionTitle] = useState('Collection name');
   const [color, setColor] = useState('#099d32');
   const dispatch = useDispatch();
-
-  const openAndHideEmojiPanel = () => {
-    setIsChooseEmoji(!isChooseEmoji);
-  };
-
-  const chooseEmoji = (EmojiClickData) => {
-    setEmoji(EmojiClickData.unified);
-    setIsChooseEmoji(false);
-  };
 
   const changeCollectionTitle = (e) => {
     setCollectionTitle(e.target.value);
@@ -53,13 +42,9 @@ function CollectionModal({ isCreateNewCollection }) {
         <h1>New Collection</h1>
         <Input onInput={changeCollectionTitle} />
         <BeautySection>
-          <EmojiBtn onClick={openAndHideEmojiPanel} />
           <ColorPanel onChange={changeColor} value={color} />
         </BeautySection>
-
-        {isChooseEmoji && (
-          <EmojiPicker height={320} onEmojiClick={chooseEmoji} />
-        )}
+        <Customization />
 
         <Collection
           color={color}
@@ -94,7 +79,7 @@ const CollectionCreator = styled.div`
 
   width: 360px;
   padding: 10px 30px 30px 30px;
-  background-color: rgb(33, 33, 41);
+  background-color: rgb(32, 32, 32);
   border-radius: 20px;
 `;
 
