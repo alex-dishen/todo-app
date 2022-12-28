@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Emoji, EmojiStyle } from 'emoji-picker-react';
@@ -5,8 +6,11 @@ import styled from 'styled-components';
 import { setCollectionID } from '../../redux/todoSlice';
 
 function Collection({ id, color, emoji, name, isCreateNewCollection }) {
-  const dispatch = useDispatch();
+  useEffect(() => {
+    if (!isCreateNewCollection) dispatch(setCollectionID(id));
+  }, []);
 
+  const dispatch = useDispatch();
   const currentCollectionID = useSelector(
     (state) => state.collections.collectionID
   );
