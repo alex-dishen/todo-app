@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { setCollectionID } from '../../redux/todoSlice';
 
 function Collection({ id, color, emoji, name, isCreateNewCollection }) {
+  // Opens the collection that is just created
   useEffect(() => {
     if (!isCreateNewCollection) dispatch(setCollectionID(id));
   }, []);

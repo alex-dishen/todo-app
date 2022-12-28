@@ -25,6 +25,7 @@ function Header() {
   const updateCollectionName = (e) => {
     dispatch(setCollectionTitle({ name: e.target.value }));
   };
+
   const deleteColl = () => {
     dispatch(deleteCollection(currentCollectionID));
   };

@@ -83,13 +83,20 @@ const todoSlice = createSlice({
     },
 
     deleteCollection: (state, action) => {
+      const index = findCollectionIndex(state);
       state.collections = state.collections.filter(
         (collection) => collection.id !== action.payload
       );
-      // collectionID is set here to prevent app from crashing after
-      // collection was deleted or if there are no collections
-      state.collectionID =
-        state.collections.length === 0 ? '' : state.collections[0].id;
+
+      // collectionID is set here to switch to another collection when
+      // one is deleted
+      if (state.collections.length === 0) {
+        state.collectionID = '';
+      } else if (index === 0) {
+        state.collectionID = state.collections[0].id;
+      } else {
+        state.collectionID = state.collections[index - 1].id;
+      }
 
       saveToLocalStorage('stateCollectionID', state.collectionID);
       saveToLocalStorage('stateCollections', state.collections);
