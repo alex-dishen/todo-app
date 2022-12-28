@@ -66,6 +66,7 @@ const EmojiHolder = styled.div.attrs((props) => ({
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-shrink: 0;
   height: 40px;
   width: 40px;
   border-radius: 6px;

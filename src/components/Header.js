@@ -42,6 +42,7 @@ function Header() {
           <CollectionName
             onInput={updateCollectionName}
             value={collectionName}
+            maxLength="22"
           />
         </CollectionIdentity>
         <Bin onClick={deleteColl} />
@@ -74,7 +75,7 @@ const CollectionIdentity = styled.div`
 `;
 
 const CollectionName = styled.input`
-  width: 300px;
+  width: 360px;
   background-color: transparent;
   color: white;
   outline: none;

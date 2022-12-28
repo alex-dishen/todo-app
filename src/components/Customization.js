@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { HexColorPicker } from 'react-colorful';
 import EmojiPicker from 'emoji-picker-react';
@@ -10,18 +10,38 @@ import '../styles/customizations.css';
 
 function Customization() {
   const dispatch = useDispatch();
+  const emojiPanelRef = useRef();
+  const colorPanelRef = useRef();
   const collections = useSelector((state) => state.collections);
 
   const { isCreateNewCollection } = collections;
   const [isChooseEmoji, setIsChooseEmoji] = useState(false);
   const [isSetColor, setIsSetColor] = useState(false);
 
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (isChooseEmoji && !emojiPanelRef.current.contains(e.target)) {
+        setIsChooseEmoji(false);
+      }
+
+      if (isSetColor && !colorPanelRef.current.contains(e.target)) {
+        setIsSetColor(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  });
+
   const setColor = (e) => {
     dispatch(setCollectionColor(e));
   };
 
   const openAndHideEmojiPanel = () => {
-    setIsChooseEmoji(!isChooseEmoji);
+    setIsChooseEmoji(true);
   };
 
   const openAndHideColorPanel = () => {
@@ -42,7 +62,11 @@ function Customization() {
         </ChooseEmojiBtn>
         {isChooseEmoji && (
           // The EmojiPanelWrapper is added to be able to position EmojiPicker
-          <EmojiPanelWrapper isCreateNewCollection={isCreateNewCollection}>
+          // and assign ref to it
+          <EmojiPanelWrapper
+            isCreateNewCollection={isCreateNewCollection}
+            ref={emojiPanelRef}
+          >
             <EmojiPicker height={320} onEmojiClick={chooseEmoji} />
           </EmojiPanelWrapper>
         )}
@@ -55,7 +79,12 @@ function Customization() {
         </ChooseColorBtn>
 
         {isSetColor && (
-          <ColorPanelWrapper isCreateNewCollection={isCreateNewCollection}>
+          // The ColorPanelWrapper is added to be able to position ColorPanelWrapper
+          // and assign ref to it
+          <ColorPanelWrapper
+            isCreateNewCollection={isCreateNewCollection}
+            ref={colorPanelRef}
+          >
             {/* The div below is added to be able to style color panel as a class
             name that styled components generate changes from time to time */}
             <div className="color-panel">

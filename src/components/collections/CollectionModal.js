@@ -73,6 +73,7 @@ const CollectionCreator = styled.div`
 const Input = styled.input.attrs({
   type: 'text',
   placeholder: 'Collection name',
+  maxLength: '22',
 })`
   width: 100%;
   padding: 6px;
