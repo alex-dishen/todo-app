@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { addTask } from '../../redux/todoSlice';
 
 function Form({ color }) {
   const dispatch = useDispatch();
+  const collections = useSelector((state) => state.collections);
+  const { isSetColor } = collections;
   const [value, setValue] = useState('');
   const [textColor, setTextColor] = useState('white');
 
@@ -31,7 +33,9 @@ function Form({ color }) {
     str.charAt(0).toUpperCase() + str.slice(1);
 
   useEffect(() => {
-    setTextColor(getTextColor(color));
+    // isSetColor is needed here to stop getTextColor from calling
+    // when user creates new collection
+    if (isSetColor) setTextColor(getTextColor(color));
   }, [color]);
 
   return (

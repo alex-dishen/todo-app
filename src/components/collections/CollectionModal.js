@@ -1,9 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Collection from './Collection';
 import Customization from '../Customization';
-import { addCollection, setIsCreateNewCollection } from '../../redux/todoSlice';
+import {
+  addCollection,
+  setIsCreateNewCollection,
+  setCollectionColor,
+} from '../../redux/todoSlice';
 
 function CollectionModal() {
   const dispatch = useDispatch();
@@ -29,6 +33,18 @@ function CollectionModal() {
     );
     hideModal();
   };
+
+  const generateRandomColor = () => {
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+
+    dispatch(setCollectionColor(`rgb(${r}, ${g}, ${b})`));
+  };
+
+  useEffect(() => {
+    generateRandomColor();
+  }, []);
 
   return (
     <>
