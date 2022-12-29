@@ -1,12 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { addTask } from '../../redux/todoSlice';
 
 function Form({ color }) {
-  const [value, setValue] = useState('');
   const dispatch = useDispatch();
+  const [value, setValue] = useState('');
+  const [textColor, setTextColor] = useState('white');
 
   const onAddClick = (e) => {
     e.preventDefault();
@@ -18,12 +19,24 @@ function Form({ color }) {
     setValue('');
   };
 
+  const getTextColor = (rgba) => {
+    const rgb = rgba.match(/\d+/g);
+    if (rgb[0] * 0.299 + rgb[1] * 0.587 + rgb[2] * 0.114 > 186) {
+      return 'rgb(0, 0, 0)';
+    }
+    return 'rgb(255, 255, 255)';
+  };
+
   const capitalizeFirstLetter = (str) =>
     str.charAt(0).toUpperCase() + str.slice(1);
 
+  useEffect(() => {
+    setTextColor(getTextColor(color));
+  }, [color]);
+
   return (
     <FormWrapper>
-      <AddButton onClick={onAddClick} color={color}>
+      <AddButton onClick={onAddClick} backgroundColor={color} color={textColor}>
         +
       </AddButton>
       <Input
@@ -66,11 +79,10 @@ const Input = styled.input`
   border-radius: 8px;
 `;
 
-const AddButton = styled.button`
+const AddButton = styled.button.attrs((props) => ({
+  style: { background: props.backgroundColor, color: props.color },
+}))`
   padding: 3px 10px;
-  background-color: #099d32;
-  background-color: ${(props) => props.color};
-  color: black;
   font-size: 18px;
   border: none;
   border-radius: 10px;

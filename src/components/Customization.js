@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { HexColorPicker } from 'react-colorful';
+import { RgbaColorPicker } from 'react-colorful';
 import EmojiPicker from 'emoji-picker-react';
 import styled from 'styled-components';
 import { ReactComponent as Smile } from '../assets/smile.svg';
@@ -37,7 +37,7 @@ function Customization() {
   });
 
   const setColor = (e) => {
-    dispatch(setCollectionColor(e));
+    dispatch(setCollectionColor(`rgba(${e.r}, ${e.g}, ${e.b}, ${e.a})`));
   };
 
   const openAndHideEmojiPanel = () => {
@@ -88,7 +88,7 @@ function Customization() {
             {/* The div below is added to be able to style color panel as a class
             name that styled components generate changes from time to time */}
             <div className="color-panel">
-              <HexColorPicker onChange={setColor} />
+              <RgbaColorPicker onChange={setColor} />
             </div>
           </ColorPanelWrapper>
         )}
