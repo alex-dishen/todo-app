@@ -24,6 +24,12 @@ const GlobalStyle = styled.createGlobalStyle`
       transform: scale(0.9);
     }
   }
+
+  @media (max-width: 770px) {
+    #root aside {
+      display: none;
+    }
+  }
 `;
 
 export default GlobalStyle;

@@ -40,8 +40,11 @@ const MainWrapper = styled.main`
 
 const Content = styled.div`
   height: 100%;
-  width: 100%;
   width: min(590px, 66vw);
+
+  @media (max-width: 770px) {
+    width: 85vw;
+  }
 `;
 
 const Instruction = styled.div`

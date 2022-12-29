@@ -1,8 +1,8 @@
 import { useDispatch } from 'react-redux';
-import { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
+import Textarea from '../Textarea';
 import {
   toggleComplete,
   changeTaskTitle,
@@ -12,11 +12,6 @@ import { ReactComponent as Bin } from '../../assets/bin.svg';
 
 function Task({ id, title, completed, color }) {
   const dispatch = useDispatch();
-  const inputRef = useRef();
-
-  useEffect(() => {
-    expendTextArea();
-  }, []);
 
   const handleCompletedClick = () => {
     dispatch(toggleComplete({ id, completed: !completed }));
@@ -26,13 +21,8 @@ function Task({ id, title, completed, color }) {
     dispatch(deleteTask({ id }));
   };
 
-  const updateTitle = (newTitle) => {
-    dispatch(changeTaskTitle({ id, title: newTitle }));
-  };
-
-  const expendTextArea = () => {
-    inputRef.current.parentNode.dataset.replicatedValue =
-      inputRef.current.value;
+  const updateTitle = (e) => {
+    dispatch(changeTaskTitle({ id, title: e.target.value }));
   };
 
   return (
@@ -48,18 +38,7 @@ function Task({ id, title, completed, color }) {
           onChange={handleCompletedClick}
           color={color}
         />
-        <TextAreaWrapper>
-          <TextArea
-            rows="1"
-            cols="54"
-            ref={inputRef}
-            defaultValue={title}
-            onInput={() => {
-              expendTextArea();
-              updateTitle(inputRef.current.value);
-            }}
-          />
-        </TextAreaWrapper>
+        <Textarea title={title} update={updateTitle} />
       </TaskSection>
       <DeleteButton onClick={handleDeleteClick}>
         <StyledBin />
@@ -117,35 +96,6 @@ const CheckBox = styled.input`
   &:checked::before {
     transform: scale(1);
   }
-`;
-
-const TextAreaWrapper = styled.div`
-  display: grid;
-
-  &::after {
-    width: 92%;
-    content: attr(data-replicated-value) ' ';
-    white-space: pre-wrap;
-    visibility: hidden;
-    grid-area: 1 / 1 / 2 / 2;
-  }
-`;
-
-const TextArea = styled.textarea`
-  width: 92%;
-  margin-left: 10px;
-
-  background-color: inherit;
-  color: white;
-
-  resize: none;
-  overflow: hidden;
-  outline: none;
-
-  border: none;
-  border-radius: 8px;
-  transition: 0.3s;
-  grid-area: 1 / 1 / 2 / 2;
 `;
 
 const DeleteButton = styled.button`

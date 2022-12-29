@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Emoji, EmojiStyle } from 'emoji-picker-react';
 import styled from 'styled-components';
 import Form from './tasks/Form';
+import Textarea from './Textarea';
 import Customization from './Customization';
 import { ReactComponent as Trash } from '../assets/bin.svg';
 import { deleteCollection, setCollectionTitle } from '../redux/todoSlice';
@@ -22,12 +23,12 @@ function Header() {
   const collectionColor =
     currentCollectionID !== '' ? currentCollection[0].color : '';
 
-  const updateCollectionName = (e) => {
-    dispatch(setCollectionTitle({ name: e.target.value }));
-  };
-
   const deleteColl = () => {
     dispatch(deleteCollection(currentCollectionID));
+  };
+
+  const updateCollectionName = (e) => {
+    dispatch(setCollectionTitle({ name: e.target.value }));
   };
 
   return (
@@ -39,13 +40,11 @@ function Header() {
             emojiStyle={EmojiStyle.APPLE}
             size={32}
           />
-          <CollectionName
-            onInput={updateCollectionName}
-            value={collectionName}
-            maxLength="22"
-          />
+          <Textarea title={collectionName} update={updateCollectionName} />
         </CollectionIdentity>
-        <Bin onClick={deleteColl} />
+        <BinHolder>
+          <Bin onClick={deleteColl} />
+        </BinHolder>
       </Collection>
       <Customization />
       <Form color={collectionColor} />
@@ -74,19 +73,10 @@ const CollectionIdentity = styled.div`
   gap: 20px;
 `;
 
-const CollectionName = styled.input`
-  width: 360px;
-  background-color: transparent;
-  color: white;
-  outline: none;
-  border: none;
-`;
-
-const Bin = styled(Trash)`
-  height: 40px;
-  width: 40px;
+const BinHolder = styled.div`
+  display: flex;
+  flex-shrink: 0;
   padding: 5px;
-  fill: white;
   border: 1px solid grey;
   border-radius: 8px;
   cursor: pointer;
@@ -94,6 +84,12 @@ const Bin = styled(Trash)`
   &:hover {
     transform: scale(1.1);
   }
+`;
+
+const Bin = styled(Trash)`
+  height: 30px;
+  width: 30px;
+  fill: white;
 `;
 
 export default Header;

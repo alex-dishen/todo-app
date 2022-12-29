@@ -24,7 +24,6 @@ const initialState = {
   collections: collectionsList,
   collectionID: currentCollectionID,
   isCreateNewCollection: false,
-  isSetColor: false,
   currentColor: '',
   currentEmoji: '',
 };
@@ -54,10 +53,6 @@ const todoSlice = createSlice({
 
       state.collections[index].name = action.payload.name;
       saveToLocalStorage('stateCollections', state.collections);
-    },
-
-    setIsSetColor: (state, action) => {
-      state.isSetColor = action.payload;
     },
 
     setCollectionColor: (state, action) => {
@@ -165,7 +160,6 @@ export const {
   setIsCreateNewCollection,
   addCollection,
   setCollectionTitle,
-  setIsSetColor,
   setCollectionColor,
   setCollectionEmoji,
   setCollectionID,

@@ -72,6 +72,8 @@ const EmojiHolder = styled.div.attrs((props) => ({
   border-radius: 6px;
 `;
 
-const CollectionName = styled.div``;
+const CollectionName = styled.div`
+  overflow-wrap: anywhere;
+`;
 
 export default Collection;

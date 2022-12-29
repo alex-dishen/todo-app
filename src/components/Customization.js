@@ -5,11 +5,7 @@ import EmojiPicker from 'emoji-picker-react';
 import styled from 'styled-components';
 import { ReactComponent as Smile } from '../assets/smile.svg';
 import { ReactComponent as Colors } from '../assets/palette.svg';
-import {
-  setCollectionColor,
-  setCollectionEmoji,
-  setIsSetColor,
-} from '../redux/todoSlice';
+import { setCollectionColor, setCollectionEmoji } from '../redux/todoSlice';
 import '../styles/customizations.css';
 
 function Customization() {
@@ -18,8 +14,9 @@ function Customization() {
   const colorPanelRef = useRef();
   const collections = useSelector((state) => state.collections);
 
-  const { isCreateNewCollection, isSetColor } = collections;
+  const { isCreateNewCollection } = collections;
   const [isChooseEmoji, setIsChooseEmoji] = useState(false);
+  const [isSetColor, setIsSetColor] = useState(false);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -48,7 +45,7 @@ function Customization() {
   };
 
   const openAndHideColorPanel = () => {
-    dispatch(setIsSetColor(!isSetColor));
+    setIsSetColor(!isSetColor);
   };
 
   const chooseEmoji = (EmojiClickData) => {
