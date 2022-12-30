@@ -38,13 +38,15 @@ const todoSlice = createSlice({
 
     addCollection: (state, action) => {
       const collection = {
-        id: uniqid(),
+        id: action.payload.id,
         color: action.payload.color,
         emoji: action.payload.emoji,
         name: action.payload.name,
         tasks: [],
       };
+      state.collectionID = action.payload.id;
       state.collections = [...state.collections, collection];
+      saveToLocalStorage('stateCollectionID', state.collectionID);
       saveToLocalStorage('stateCollections', state.collections);
     },
 

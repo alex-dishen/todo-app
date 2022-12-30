@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import uniqid from 'uniqid';
 import Collection from './Collection';
 import Customization from '../Customization';
 import {
@@ -26,6 +27,7 @@ function CollectionModal() {
   const onAddClick = () => {
     dispatch(
       addCollection({
+        id: uniqid(),
         color: currentColor,
         emoji: currentEmoji,
         name: collectionTitle,
