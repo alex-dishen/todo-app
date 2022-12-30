@@ -6,7 +6,7 @@ const GlobalStyle = styled.createGlobalStyle`
     display: flex;
     justify-content: center;
     background-color: rgb(25, 25, 25);
-    font-family: Sen;
+    font-family: Sen, sans-serif;
   }
 
   #root {

@@ -19,12 +19,16 @@ function Form({ color }) {
     setValue('');
   };
 
-  const getTextColor = (rgba) => {
-    const rgb = rgba.match(/\d+/g);
-    if (rgb[0] * 0.299 + rgb[1] * 0.587 + rgb[2] * 0.114 > 186) {
-      return 'rgb(0, 0, 0)';
-    }
-    return 'rgb(255, 255, 255)';
+  const getTextColor = (bgColor) => {
+    const colour =
+      bgColor.charAt(0) === '#' ? bgColor.substring(1, 7) : bgColor;
+    const r = parseInt(colour.substring(0, 2), 16); // hexToR
+    const g = parseInt(colour.substring(2, 4), 16); // hexToG
+    const b = parseInt(colour.substring(4, 6), 16); // hexToB
+
+    return r * 0.299 + g * 0.587 + b * 0.114 > 186
+      ? 'rgb(0, 0, 0)'
+      : 'rgb(255, 255, 255)';
   };
 
   const capitalizeFirstLetter = (str) =>

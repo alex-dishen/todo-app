@@ -48,6 +48,11 @@ const Aside = styled.aside`
   }
 `;
 
+const Div = styled.div`
+  padding: 10px 15px;
+  font-size: 20px;
+`;
+
 const Arrow = styled(ChevronLeft)`
   position: absolute;
   top: 50%;
@@ -67,10 +72,6 @@ const CollectionsListWrapper = styled.div`
   overflow: scroll;
   border-top: 1px solid rgb(43, 43, 43);
   border-bottom: 1px solid rgb(43, 43, 43);
-`;
-
-const Div = styled.div`
-  padding: 10px 15px;
 `;
 
 const AddSection = styled.div`

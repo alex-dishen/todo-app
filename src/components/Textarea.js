@@ -36,7 +36,7 @@ function Textarea({ title, update }) {
         cols={isTaskTextArea ? '54' : '32'}
         isTaskTextArea={isTaskTextArea}
         ref={inputRef}
-        defaultValue={title}
+        value={title}
         onInput={handleInput}
       />
     </TextAreaWrapper>
