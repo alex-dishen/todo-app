@@ -41,7 +41,15 @@ function CollectionModal() {
     const g = Math.floor(Math.random() * 256);
     const b = Math.floor(Math.random() * 256);
 
-    dispatch(setCollectionColor(`rgb(${r}, ${g}, ${b})`));
+    const componentToHex = (c) => {
+      const hex = c.toString(16);
+      return hex.length === 1 ? `0${hex}` : hex;
+    };
+
+    const rgbToHex = () =>
+      `#${componentToHex(r)}${componentToHex(g)}${componentToHex(b)}`;
+
+    dispatch(setCollectionColor(rgbToHex()));
   };
 
   useEffect(() => {
@@ -53,7 +61,7 @@ function CollectionModal() {
       <CollectionCreator>
         <h1>New Collection</h1>
         <Input onInput={changeCollectionTitle} />
-        <Customization />
+        <Customization color={currentColor} />
         <Collection
           color={currentColor}
           emoji={currentEmoji}

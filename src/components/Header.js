@@ -46,7 +46,7 @@ function Header() {
           <Bin onClick={deleteColl} />
         </BinHolder>
       </Collection>
-      <Customization />
+      <Customization color={collectionColor} />
       <Form color={collectionColor} />
     </HeaderWrapper>
   );

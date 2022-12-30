@@ -19,10 +19,6 @@ div.Flex.epr-preview.FlexRow {
   border-radius: 5px;
 }
 
-.color-panel .react-colorful__hue {
-  margin-bottom: 8px;
-}
-
 .color-panel .react-colorful__hue-pointer,
 .color-panel .react-colorful__alpha-pointer,
 .color-panel .react-colorful__saturation-pointer {
