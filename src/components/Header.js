@@ -70,7 +70,7 @@ const Collection = styled.div`
 const CollectionIdentity = styled.div`
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 5px;
 `;
 
 const BinHolder = styled.div`

@@ -142,7 +142,7 @@ const EmojiPanelWrapper = styled.div`
   transform: ${(props) =>
     props.isCreateNewCollection
       ? 'translate(-50%, -110%)'
-      : 'translate(-50%, 10%)'};
+      : 'translate(-15%, 10%)'};
 `;
 
 const ColorSection = styled.div`
