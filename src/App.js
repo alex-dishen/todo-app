@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { motion, AnimatePresence } from 'framer-motion';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import TasksList from './components/tasks/TasksList';
@@ -9,7 +10,6 @@ import { ReactComponent as ChevronRight } from './assets/chevron-right.svg';
 import './styles/normalize.css';
 
 function App() {
-  // localStorage.clear();
   const collections = useSelector((state) => state.collections);
   const { isCreateNewCollection, collectionID } = collections;
   const [windowWidth, setWindowWidth] = useState();
@@ -42,25 +42,34 @@ function App() {
 
   return (
     <>
-      {isHideSidebar ? (
-        <Arrow onClick={showAndHideSidebar} />
-      ) : (
-        <Sidebar
-          windowWidth={windowWidth}
-          showAndHideSidebar={showAndHideSidebar}
-        />
-      )}
+      <AnimatePresence>
+        {isHideSidebar ? (
+          <Arrow onClick={showAndHideSidebar} />
+        ) : (
+          <Sidebar
+            key="sidebar"
+            windowWidth={windowWidth}
+            showAndHideSidebar={showAndHideSidebar}
+          />
+        )}
+      </AnimatePresence>
       <MainWrapper>
         {collectionID === '' ? (
           <Instruction>Select a collection to start planning</Instruction>
         ) : (
-          <Content>
+          <Content
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+          >
             <Header />
             <TasksList />
           </Content>
         )}
       </MainWrapper>
-      {isCreateNewCollection && <CollectionModal />}
+      <AnimatePresence>
+        {isCreateNewCollection && <CollectionModal />}
+      </AnimatePresence>
     </>
   );
 }
@@ -74,7 +83,7 @@ const MainWrapper = styled.main`
   overflow: scroll;
 `;
 
-const Content = styled.div`
+const Content = styled(motion.div)`
   height: 100%;
   width: min(590px, 66vw);
 

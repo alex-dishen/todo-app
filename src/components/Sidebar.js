@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { motion, AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
 import CollectionList from './collections/CollectionList';
 import { setIsCreateNewCollection } from '../redux/todoSlice';
@@ -14,7 +15,12 @@ function Sidebar({ windowWidth, showAndHideSidebar }) {
   };
 
   return (
-    <Aside>
+    <Aside
+      initial={{ x: -230 }}
+      animate={{ x: 0 }}
+      exit={{ x: -230 }}
+      transition={{ duration: 0.5 }}
+    >
       <Div>Collections </Div>
       {windowWidth <= 770 && <Arrow onClick={showAndHideSidebar} />}
       <CollectionsListWrapper>
@@ -32,7 +38,7 @@ Sidebar.propTypes = {
   showAndHideSidebar: PropTypes.func,
 };
 
-const Aside = styled.aside`
+const Aside = styled(motion.aside)`
   display: flex;
   flex-direction: column;
   width: 230px;

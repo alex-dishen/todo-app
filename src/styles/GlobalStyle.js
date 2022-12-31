@@ -16,7 +16,7 @@ const GlobalStyle = styled.createGlobalStyle`
   }
 
   button {
-    transition: 0.3s;
+    transition: transform 0.3s;
     &:hover {
       transform: scale(1.07);
     }

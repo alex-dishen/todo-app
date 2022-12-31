@@ -3,6 +3,8 @@ The **To-Do** project is created according to the assignment from **DomDev** [co
 <br>
 <br>
 
+![Preview](public/todo.png)
+
 ### 🔗 **Live preview** of the project is [here](https://alex-dishen.github.io/todo-app/).
 
 ## **Features**
@@ -15,6 +17,8 @@ The **To-Do** project is created according to the assignment from **DomDev** [co
 * Check task as accomplished
 * Delete task
 * Local storage
+* Emoji picker
+* Custom color picker
 
 ## **Outcome**
 * Used **React**

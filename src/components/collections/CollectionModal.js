@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import uniqid from 'uniqid';
+import { motion } from 'framer-motion';
 import Collection from './Collection';
 import Customization from '../Customization';
 import {
@@ -58,7 +59,12 @@ function CollectionModal() {
 
   return (
     <>
-      <CollectionCreator>
+      <CollectionCreator
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.3 }}
+        exit={{ opacity: 0 }}
+      >
         <h1>New Collection</h1>
         <Input onInput={changeCollectionTitle} />
         <Customization color={currentColor} />
@@ -73,14 +79,19 @@ function CollectionModal() {
           <AddBtn onClick={onAddClick}>Add</AddBtn>
         </ButtonSection>
       </CollectionCreator>
-      <Overlay />
+      <Overlay
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.4 }}
+        transition={{ duration: 0.3 }}
+        exit={{ opacity: 0 }}
+      />
     </>
   );
 }
 
-const CollectionCreator = styled.div`
+const CollectionCreator = styled(motion.div)`
   position: absolute;
-  z-index: 1;
+  z-index: 3;
 
   display: flex;
   flex-direction: column;
@@ -99,7 +110,6 @@ const CollectionCreator = styled.div`
 const Input = styled.input.attrs({
   type: 'text',
   placeholder: 'Collection name',
-  maxLength: '22',
 })`
   width: 100%;
   padding: 6px;
@@ -130,12 +140,13 @@ const CancelBtn = styled.button`
 
 const AddBtn = styled(CancelBtn)``;
 
-const Overlay = styled.div`
+const Overlay = styled(motion.div)`
   position: absolute;
   height: 100%;
   width: 100%;
   background-color: black;
   opacity: 0.4;
+  z-index: 2;
 `;
 
 export default CollectionModal;

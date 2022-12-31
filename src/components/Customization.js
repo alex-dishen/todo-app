@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { HexColorPicker } from 'react-colorful';
 import EmojiPicker from 'emoji-picker-react';
 import styled from 'styled-components';
+import { motion, AnimatePresence } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { ReactComponent as Smile } from '../assets/smile.svg';
 import { ReactComponent as Colors } from '../assets/palette.svg';
@@ -54,6 +55,18 @@ function Customization({ color }) {
     setIsChooseEmoji(false);
   };
 
+  const variants = {
+    hiddenEmoji: { x: -100, y: -250, opacity: 0 },
+    visibleEmoji: { x: -100, y: -350, opacity: 1 },
+    visibleNewColEmoji: { y: 20, opacity: 1 },
+
+    hiddenNewColElement: { y: 0, opacity: 0 },
+
+    hiddenColor: { x: -70, y: -250, opacity: 0 },
+    visibleColor: { x: -70, y: -280, opacity: 1 },
+    visibleNewColColor: { y: 10, opacity: 1 },
+  };
+
   return (
     <CustomizationSection>
       <EmojiSection>
@@ -61,16 +74,30 @@ function Customization({ color }) {
           <StyledSmile />
           Add icon
         </ChooseEmojiBtn>
-        {isChooseEmoji && (
-          // The EmojiPanelWrapper is added to be able to position EmojiPicker
-          // and assign ref to it
-          <EmojiPanelWrapper
-            isCreateNewCollection={isCreateNewCollection}
-            ref={emojiPanelRef}
-          >
-            <EmojiPicker height={320} onEmojiClick={chooseEmoji} />
-          </EmojiPanelWrapper>
-        )}
+        <AnimatePresence>
+          {isChooseEmoji && (
+            // The EmojiPanelWrapper is added to be able to position EmojiPicker
+            // and assign ref to it
+            <EmojiPanelWrapper
+              isCreateNewCollection={isCreateNewCollection}
+              ref={emojiPanelRef}
+              // Animations
+              initial={
+                isCreateNewCollection ? 'hiddenEmoji' : 'hiddenNewColElement'
+              }
+              animate={
+                isCreateNewCollection ? 'visibleEmoji' : 'visibleNewColEmoji'
+              }
+              transition={{ duration: 0.3 }}
+              exit={
+                isCreateNewCollection ? 'hiddenEmoji' : 'hiddenNewColElement'
+              }
+              variants={variants}
+            >
+              <EmojiPicker height={320} onEmojiClick={chooseEmoji} />
+            </EmojiPanelWrapper>
+          )}
+        </AnimatePresence>
       </EmojiSection>
 
       <ColorSection>
@@ -79,20 +106,34 @@ function Customization({ color }) {
           Add color
         </ChooseColorBtn>
 
-        {isSetColor && (
-          // The ColorPanelWrapper is added to be able to position ColorPanelWrapper
-          // and assign ref to it
-          <ColorPanelWrapper
-            isCreateNewCollection={isCreateNewCollection}
-            ref={colorPanelRef}
-          >
-            {/* The div below is added to be able to style color panel as a class
-            name that styled components generate changes from time to time */}
-            <div className="color-panel">
-              <HexColorPicker color={color} onChange={setColor} />
-            </div>
-          </ColorPanelWrapper>
-        )}
+        <AnimatePresence>
+          {isSetColor && (
+            // The ColorPanelWrapper is added to be able to position ColorPanelWrapper
+            // and assign ref to it
+            <ColorPanelWrapper
+              isCreateNewCollection={isCreateNewCollection}
+              ref={colorPanelRef}
+              // Animations
+              initial={
+                isCreateNewCollection ? 'hiddenColor' : 'hiddenNewColElement'
+              }
+              animate={
+                isCreateNewCollection ? 'visibleColor' : 'visibleNewColColor'
+              }
+              transition={{ duration: 0.3 }}
+              exit={
+                isCreateNewCollection ? 'hiddenColor' : 'hiddenNewColElement'
+              }
+              variants={variants}
+            >
+              {/* The div below is added to be able to style color panel as a class
+              name that styled components generate changes from time to time */}
+              <div className="color-panel">
+                <HexColorPicker color={color} onChange={setColor} />
+              </div>
+            </ColorPanelWrapper>
+          )}
+        </AnimatePresence>
       </ColorSection>
     </CustomizationSection>
   );
@@ -113,12 +154,6 @@ const EmojiSection = styled.div`
   position: relative;
 `;
 
-const StyledSmile = styled(Smile)`
-  height: 20px;
-  width: 20px;
-  fill: rgb(99, 99, 99);
-`;
-
 const ChooseEmojiBtn = styled.div`
   display: flex;
   align-items: center;
@@ -135,14 +170,14 @@ const ChooseEmojiBtn = styled.div`
   }
 `;
 
-const EmojiPanelWrapper = styled.div`
+const StyledSmile = styled(Smile)`
+  height: 20px;
+  width: 20px;
+  fill: rgb(99, 99, 99);
+`;
+
+const EmojiPanelWrapper = styled(motion.div)`
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: ${(props) =>
-    props.isCreateNewCollection
-      ? 'translate(-50%, -110%)'
-      : 'translate(-15%, 10%)'};
 `;
 
 const ColorSection = styled.div`

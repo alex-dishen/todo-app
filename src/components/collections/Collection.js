@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Emoji, EmojiStyle } from 'emoji-picker-react';
 import styled from 'styled-components';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Emoji, EmojiStyle } from 'emoji-picker-react';
 import { setCollectionID } from '../../redux/todoSlice';
 
 function Collection({ id, color, emoji, name, isCreateNewCollection }) {
@@ -22,6 +23,9 @@ function Collection({ id, color, emoji, name, isCreateNewCollection }) {
       currentCollectionID={currentCollectionID}
       id={id}
       onClick={getCollectionId}
+      initial={!isCreateNewCollection && { y: 7, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.2 }}
     >
       <EmojiHolder color={color}>
         <Emoji unified={emoji} emojiStyle={EmojiStyle.APPLE} size={22} />
@@ -39,7 +43,7 @@ Collection.propTypes = {
   isCreateNewCollection: PropTypes.bool,
 };
 
-const CollectionWrapper = styled.div`
+const CollectionWrapper = styled(motion.div)`
   display: flex;
   align-items: center;
   padding: 10px 15px;
@@ -47,6 +51,7 @@ const CollectionWrapper = styled.div`
   background-color: ${(props) =>
     props.currentCollectionID === props.id ? 'rgb(45, 45, 45)' : 'transparent'};
   cursor: ${(props) => (props.isCreateNewCollection ? 'auto' : 'pointer')};
+  transition: 0.3s;
 
   &:hover {
     background-color: ${(props) =>

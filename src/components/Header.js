@@ -80,9 +80,12 @@ const BinHolder = styled.div`
   border: 1px solid grey;
   border-radius: 8px;
   cursor: pointer;
-
+  transition: transform 0.3s;
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.07);
+  }
+  &:active {
+    transform: scale(0.9);
   }
 `;
 
