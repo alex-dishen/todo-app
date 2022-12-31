@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Emoji, EmojiStyle } from 'emoji-picker-react';
 import { setCollectionID } from '../../redux/todoSlice';
 
