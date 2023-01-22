@@ -42,7 +42,7 @@ function App() {
 
   return (
     <>
-      <AnimatePresence>
+      <AnimatePresence initial={false}>
         {isHideSidebar ? (
           <Arrow onClick={showAndHideSidebar} />
         ) : (

@@ -19,8 +19,8 @@ function Collection({ id, color, emoji, name, isCreateNewCollection }) {
 
   return (
     <CollectionWrapper
-      isCreateNewCollection={isCreateNewCollection}
-      currentCollectionID={currentCollectionID}
+      iscreatenewcollection={isCreateNewCollection}
+      currentcollectionid={currentCollectionID}
       id={id}
       onClick={getCollectionId}
       initial={!isCreateNewCollection && { y: 7, opacity: 0 }}
@@ -49,13 +49,13 @@ const CollectionWrapper = styled(motion.div)`
   padding: 10px 15px;
   gap: 10px;
   background-color: ${(props) =>
-    props.currentCollectionID === props.id ? 'rgb(45, 45, 45)' : 'transparent'};
-  cursor: ${(props) => (props.isCreateNewCollection ? 'auto' : 'pointer')};
+    props.currentcollectionid === props.id ? 'rgb(45, 45, 45)' : 'transparent'};
+  cursor: ${(props) => (props.iscreatenewcollection ? 'auto' : 'pointer')};
   transition: 0.3s;
 
   &:hover {
     background-color: ${(props) =>
-      props.isCreateNewCollection ? 'transparent' : 'rgb(45, 45, 45)'};
+      props.iscreatenewcollection ? 'transparent' : 'rgb(45, 45, 45)'};
   }
 `;
 

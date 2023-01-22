@@ -59,6 +59,7 @@ const TextAreaWrapper = styled.div`
     font-weight: 100;
     content: attr(data-replicated-value) ' ';
     overflow-wrap: anywhere;
+    white-space: pre-wrap;
 
     visibility: hidden;
     grid-area: 1 / 1 / 2 / 2;
@@ -81,7 +82,6 @@ const TextArea = styled.textarea`
   outline: none;
 
   border: none;
-  border-radius: 8px;
   transition: 0.3s;
   grid-area: 1 / 1 / 2 / 2;
 `;
